@@ -1,0 +1,49 @@
+{
+  "name": "notes_demo",
+  "version": "1.0.0",
+  "description": "simple React & Redux demo application for github account",
+  "main": "index.js",
+  "scripts": {
+    "build:development": "webpack --config webpack.config.dev.js",
+    "watch": "webpack --config webpack.config.dev.js --watch",
+    "server": "webpack-dev-server --config webpack.config.dev.js --color --progress",
+    "test": "jest"
+  },
+  "keywords": [
+    "demo",
+    "rect",
+    "redux",
+    "notes",
+    "localStorage"
+  ],
+  "author": "Andrey Zhuravlyov",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.1.0",
+    "babel-loader": "^8.0.5",
+    "clean-webpack-plugin": "^1.0.1",
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-flowtype": "^3.2.1",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "flow-bin": "^0.92.1",
+    "flow-typed": "^2.5.1",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.1.0",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.1.14"
+  },
+  "dependencies": {
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1"
+  }
+}
