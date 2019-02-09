@@ -7,7 +7,8 @@
     "build:development": "webpack --config webpack.config.dev.js",
     "watch": "webpack --config webpack.config.dev.js --watch",
     "server": "webpack-dev-server --config webpack.config.dev.js --color --progress",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "keywords": [
     "demo",
