@@ -28,6 +28,7 @@
     "babel-jest": "^24.1.0",
     "babel-loader": "^8.0.5",
     "clean-webpack-plugin": "^1.0.1",
+    "css-loader": "^2.1.0",
     "eslint": "^5.13.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-flowtype": "^3.2.1",
@@ -38,12 +39,18 @@
     "flow-typed": "^2.5.1",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.1.0",
+    "style-loader": "^0.23.1",
     "webpack": "^4.29.3",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
+    "bootstrap": "^4.2.1",
+    "faker": "^4.1.0",
     "react": "^16.8.1",
-    "react-dom": "^16.8.1"
+    "react-dom": "^16.8.1",
+    "react-redux": "^6.0.0",
+    "reactstrap": "^7.1.0",
+    "redux": "^4.0.1"
   }
 }
