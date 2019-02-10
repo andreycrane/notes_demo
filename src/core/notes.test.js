@@ -14,9 +14,11 @@ describe('core#notes', () => {
 
     const nextNotes = create(
       prevNotes,
-      title,
-      text,
-      color,
+      {
+        title,
+        text,
+        color,
+      },
     );
 
     expect(nextNotes).toHaveProperty('0.id');
@@ -40,11 +42,13 @@ describe('core#notes', () => {
 
     const nextNotes = update(
       prevNotes,
-      id,
-      null,
-      text,
-      color,
-      categoryId,
+      {
+        noteId: id,
+        title: null,
+        text,
+        color,
+        category: categoryId,
+      },
     );
 
     expect(nextNotes).toHaveProperty('0.id', id);
@@ -57,7 +61,7 @@ describe('core#notes', () => {
   it('removes existing note', () => {
     const prevNotes = [{ id }];
 
-    const nextNotes = remove(prevNotes, id);
+    const nextNotes = remove(prevNotes, { noteId: id });
 
     expect(nextNotes).toHaveLength(0);
   });

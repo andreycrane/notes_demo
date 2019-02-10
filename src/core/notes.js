@@ -6,11 +6,20 @@ import id from '../lib/id';
 
 export function create(
   notes: TNotes,
-  title: ?string,
-  text: string,
-  color: ?string,
-  category: ?TId,
+  payload: {
+    title: ?string,
+    text: string,
+    color: ?string,
+    category: ?TId,
+  },
 ): TNotes {
+  const {
+    title,
+    text,
+    color,
+    category,
+  } = payload;
+
   return [
     {
       id: id(),
@@ -26,12 +35,22 @@ export function create(
 
 export function update(
   notes: TNotes,
-  noteId: string,
-  title: ?string,
-  text: string,
-  color: ?string,
-  category: ?TId,
+  payload: {
+    noteId: string,
+    title: ?string,
+    text: string,
+    color: ?string,
+    category: ?TId,
+  },
 ): TNotes {
+  const {
+    noteId,
+    title,
+    text,
+    color,
+    category,
+  } = payload;
+
   return notes.map((n: TNote): TNote => {
     if (n.id !== noteId) {
       return n;
@@ -47,9 +66,14 @@ export function update(
   });
 }
 
+
 export function remove(
   notes: TNotes,
-  noteId: TId,
+  payload: {
+    noteId: TId,
+  },
 ): TNotes {
+  const { noteId } = payload;
+
   return notes.filter(n => n.id !== noteId);
 }

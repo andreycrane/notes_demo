@@ -1,6 +1,6 @@
 // @flow
 
-import type { TAction, TNotes } from '../types';
+import type { TId, TAction, TNotes } from '../types';
 
 // Actions
 const CREATE = 'notes-demo/notes/CREATE';
@@ -18,14 +18,33 @@ export default function reducer(state: TNotes = [], action: TAction) {
 }
 
 // Action Creators
-export function createNote(payload: mixed): TAction {
+export function createNote(
+  payload: {
+    title: ?string,
+    text: string,
+    color: ?string,
+    category: ?TId,
+  },
+): TAction {
   return { type: CREATE, payload };
 }
 
-export function updateWidget(payload: mixed): TAction {
+export function updateWidget(
+  payload: {
+    noteId: string,
+    title: ?string,
+    text: string,
+    color: ?string,
+    category: ?TId,
+  },
+): TAction {
   return { type: UPDATE, payload };
 }
 
-export function removeWidget(payload: mixed): TAction {
+export function removeWidget(
+  payload: {
+    noteId: TId,
+  },
+): TAction {
   return { type: REMOVE, payload };
 }
