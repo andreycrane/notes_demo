@@ -1,21 +1,24 @@
 // @flow
 
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import type { Dispatch } from 'redux';
 
 import type { TState, TAction } from './types';
 
-const defaultState: TState = {
-  notes: [],
-  categories: [],
-};
+import notesReducer from './ducks/notes';
+import categoriesReducer from './ducks/categories';
 
-function rootReducer(state: TState = defaultState): TState {
-  return state;
-}
+const rootReducer = combineReducers({
+  notes: notesReducer,
+  categories: categoriesReducer,
+});
 
 export default function configureStore(preloadedState: TState) {
-  const store = createStore<TState, TAction, Dispatch<TAction>>(rootReducer, preloadedState);
+  const store = createStore<TState, TAction, Dispatch<TAction>>(
+    rootReducer,
+    preloadedState,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
 
   return store;
 }

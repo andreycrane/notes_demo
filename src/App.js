@@ -3,50 +3,28 @@
 import React from 'react';
 import {
   Container,
-  Navbar,
-  NavbarBrand,
-  Input,
   Row,
-  Col,
 } from 'reactstrap';
 
-import Bar from './Bar';
-import Note from './Note';
+import Sidebar from './components/Sidebar';
+import TopBar from './components/TopBar';
+import NotesList from './components/NotesList';
 
 export default function App() {
+  const style = {
+    paddingTop: '56px',
+  };
+
   return (
     <React.Fragment>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">Notes</NavbarBrand>
-        <Input
-          type="text"
-          className="w-100"
-        />
-      </Navbar>
+      <TopBar />
       <Container fluid>
-        <Row>
-          <Col lg={2}>
-            <Bar />
-          </Col>
-          <Col lg={10}>
-            <Row>
-              <Col md={4}>
-                <Note />
-              </Col>
-              <Col md={4}>
-                <Note />
-              </Col>
-              <Col md={4}>
-                <Note />
-              </Col>
-              <Col md={4}>
-                <Note />
-              </Col>
-              <Col md={4}>
-                <Note />
-              </Col>
-            </Row>
-          </Col>
+        <Row
+          role="main"
+          style={style}
+        >
+          <Sidebar />
+          <NotesList />
         </Row>
       </Container>
     </React.Fragment>
