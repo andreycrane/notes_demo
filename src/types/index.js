@@ -4,18 +4,27 @@ export type TId = string;
 
 export type TNote = $ReadOnly<{|
   id: TId,
-  title: string,
+  title: ?string,
   text: string,
-  color: string,
-  category: TId | null
+  color: ?string,
+  category: ?TId
 |}>;
+
+export type TNotes = $ReadOnlyArray<TNote>;
 
 export type TCategory = $ReadOnly<{|
   id: TId,
   name: string
 |}>;
 
+export type TCategories = $ReadOnlyArray<TCategory>;
+
 export type TState = $ReadOnly<{|
-  notes: $ReadOnlyArray<TNote>,
-  categories: $ReadOnlyArray<TCategory>
+  notes: TNotes,
+  categories: TCategories
+|}>;
+
+export type TAction = $ReadOnly<{|
+  type: string,
+  payload: mixed
 |}>;
