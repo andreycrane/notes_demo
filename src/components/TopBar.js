@@ -20,10 +20,10 @@ export default function TopBar() {
       <NavbarBrand href="/">Notes</NavbarBrand>
       <Input
         type="text"
-        className="bg-dark text-light mr-2"
+        className="bg-dark text-light mr-2 rounded-0"
       />
       <Button
-        color="primary"
+        color="primary rounded-0"
       >
         New
       </Button>

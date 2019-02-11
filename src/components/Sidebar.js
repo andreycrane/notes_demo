@@ -4,9 +4,8 @@ import React from 'react';
 
 import {
   Col,
-  Nav,
-  NavItem,
-  NavLink,
+  ListGroup,
+  ListGroupItem,
 } from 'reactstrap';
 
 export default function Sidebar() {
@@ -16,7 +15,7 @@ export default function Sidebar() {
     bottom: 0,
     left: 0,
     zIndex: 100,
-    padding: '56px 0 0',
+    padding: '60px 0 0',
     boxShadow: 'inset -1px 0 0 rgba(0, 0, 0, .1)',
   };
 
@@ -24,30 +23,16 @@ export default function Sidebar() {
     <Col
       lg={2}
       style={style}
+      className="px-2"
     >
-      <p>List Based</p>
-      <Nav vertical>
-        <NavItem>
-          <NavLink href="#">Link</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink href="#">Link</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink href="#">Another Link</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink disabled href="#">Disabled Link</NavLink>
-        </NavItem>
-      </Nav>
-      <hr />
-      <p>Link based</p>
-      <Nav vertical>
-        <NavLink href="#">Link</NavLink>
-        <NavLink href="#">Link</NavLink>
-        <NavLink href="#">Another Link</NavLink>
-        <NavLink disabled href="#">Disabled Link</NavLink>
-      </Nav>
+      <h4>Categories</h4>
+      <ListGroup>
+        <ListGroupItem>Cras justo odio</ListGroupItem>
+        <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
+        <ListGroupItem>Morbi leo risus</ListGroupItem>
+        <ListGroupItem>Porta ac consectetur ac</ListGroupItem>
+        <ListGroupItem>Vestibulum at eros</ListGroupItem>
+      </ListGroup>
     </Col>
   );
 }

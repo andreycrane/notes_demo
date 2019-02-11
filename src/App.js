@@ -9,6 +9,7 @@ import {
 import Sidebar from './components/Sidebar';
 import TopBar from './components/TopBar';
 import NotesList from './components/NotesList';
+import EditModal from './components/EditModal';
 
 export default function App() {
   const style = {
@@ -25,6 +26,7 @@ export default function App() {
         >
           <Sidebar />
           <NotesList />
+          <EditModal isOpen />
         </Row>
       </Container>
     </React.Fragment>
