@@ -20,7 +20,7 @@ type Props = {
   isOpen: boolean
 };
 
-export default function EditModel({ isOpen }: Props) {
+export default function EditModal({ isOpen }: Props) {
   return (
     <Modal isOpen={isOpen}>
       <ModalHeader>Modal title</ModalHeader>

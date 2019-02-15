@@ -8,9 +8,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import App from './App';
 import configureStore from './configureStore';
-import preloadedState from './example-state';
+import defaultState from './default-state';
 
-const store = configureStore(preloadedState);
+const store = configureStore(defaultState);
 const rootDiv = document.createElement('div');
 
 if (document.body && rootDiv) {

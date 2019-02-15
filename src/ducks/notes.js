@@ -1,21 +1,14 @@
 // @flow
 
+import { lorem, internet } from 'faker';
+
 import type { TId, TAction, TNotes } from '../types';
+import id from '../lib/id';
 
 // Actions
 const CREATE = 'notes-demo/notes/CREATE';
 const UPDATE = 'notes-demo/notes/UPDATE';
 const REMOVE = 'notes-demo/notes/REMOVE';
-
-
-// Reducer
-export default function reducer(state: TNotes = [], action: TAction) {
-  switch (action.type) {
-    // do reducer stuff
-    default:
-      return state;
-  }
-}
 
 // Action Creators
 export function createNote(
@@ -29,7 +22,7 @@ export function createNote(
   return { type: CREATE, payload };
 }
 
-export function updateWidget(
+export function updateNote(
   payload: {
     noteId: string,
     title: ?string,
@@ -41,10 +34,44 @@ export function updateWidget(
   return { type: UPDATE, payload };
 }
 
-export function removeWidget(
+export function removeNote(
   payload: {
     noteId: TId,
   },
 ): TAction {
   return { type: REMOVE, payload };
+}
+
+// Default state
+export const defaultState: TNotes = [
+  {
+    id: id(),
+    title: lorem.sentence(),
+    text: lorem.text(),
+    color: internet.color(),
+    category: null,
+  },
+  {
+    id: id(),
+    title: lorem.sentence(),
+    text: lorem.text(),
+    color: internet.color(),
+    category: null,
+  },
+  {
+    id: id(),
+    title: lorem.sentence(),
+    text: lorem.text(),
+    color: internet.color(),
+    category: null,
+  },
+];
+
+// Reducer
+export default function reducer(state: TNotes = defaultState, action: TAction) {
+  switch (action.type) {
+    // do reducer stuff
+    default:
+      return state;
+  }
 }
