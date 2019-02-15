@@ -68,7 +68,7 @@ export const defaultState: TNotes = [
 ];
 
 // Reducer
-export default function reducer(state: TNotes = defaultState, action: TAction) {
+export default function reducer(state: TNotes = defaultState, action: TAction): TNotes {
   switch (action.type) {
     // do reducer stuff
     default:

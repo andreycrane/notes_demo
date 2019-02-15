@@ -56,7 +56,7 @@ export const defaultState: TCategories = [
 
 
 // Reducer
-export default function reducer(state: TCategories = defaultState, action: TAction) {
+export default function reducer(state: TCategories = defaultState, action: TAction): TCategories {
   switch (action.type) {
     // do reducer stuff
     default:
