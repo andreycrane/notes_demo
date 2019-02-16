@@ -2,33 +2,44 @@
 
 import type {
   TId,
-  TAction,
   TEdit,
   TEditType,
 } from '../types';
 
-// Actions
-const EDIT_NEW = 'notes-demo/edit/EDIT_NEW';
-const EDIT_EXISTING = 'notes-demo/edit/EDIT_EXISTING';
-const CLOSE_EDIT = 'notes-demo/edit/CLOSE_EDIT';
+
+// Action types
+type TEditNew = $ReadOnly<{|
+  type: 'EDIT_NEW',
+  payload: { type: TEditType },
+|}>;
+
+type TEditExistsing = $ReadOnly<{|
+  type: 'EDIT_EXISTING',
+  payload: { type: TEditType, id: TId },
+|}>;
+
+type TCloseEdit = $ReadOnly<{|
+  type: 'CLOSE_EDIT',
+  payload: {},
+|}>;
+
+export type TAction =
+  | TEditNew
+  | TEditExistsing
+  | TCloseEdit;
+
 
 // Action Creators
-export function editNew(type: TEditType): TAction {
-  return {
-    type: EDIT_NEW,
-    payload: { type },
-  };
+export function editNew(type: TEditType): TEditNew {
+  return { type: 'EDIT_NEW', payload: { type } };
 }
 
-export function editExisting(type: TEditType, id: TId): TAction {
-  return {
-    type: EDIT_EXISTING,
-    payload: { type, id },
-  };
+export function editExisting(type: TEditType, id: TId): TEditExistsing {
+  return { type: 'EDIT_EXISTING', payload: { type, id } };
 }
 
-export function closeEdit(): TAction {
-  return { type: CLOSE_EDIT, payload: {} };
+export function closeEdit(): TCloseEdit {
+  return { type: 'CLOSE_EDIT', payload: {} };
 }
 
 // Default state
@@ -40,22 +51,20 @@ export const defaultState: TEdit = {
 
 // Reducer
 export default function reducer(state: TEdit = defaultState, action: TAction): TEdit {
-  const { payload } = action;
-
   switch (action.type) {
-    case EDIT_NEW:
+    case 'EDIT_NEW':
       return {
-        type: payload.type,
+        type: action.payload.type,
         mode: 'NEW',
         id: null,
       };
-    case EDIT_EXISTING:
+    case 'EDIT_EXISTING':
       return {
-        type: payload.type,
-        id: payload.id,
+        type: action.payload.type,
+        id: action.payload.id,
         mode: 'EXISTING',
       };
-    case CLOSE_EDIT:
+    case 'CLOSE_EDIT':
       return {
         type: null,
         mode: null,

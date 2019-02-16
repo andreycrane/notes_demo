@@ -27,5 +27,10 @@ module.exports = {
     ],
     "flowtype/no-weak-types": [2],
     "flowtype/require-return-type": [2, "always"],
+  },
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": true
+    }
   }
 };

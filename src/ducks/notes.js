@@ -2,13 +2,33 @@
 
 import { lorem, internet } from 'faker';
 
-import type { TId, TAction, TNotes } from '../types';
+import type { TId, TNotes } from '../types';
+import { create, update, remove } from '../core/notes';
 import id from '../lib/id';
 
-// Actions
-const CREATE = 'notes-demo/notes/CREATE';
-const UPDATE = 'notes-demo/notes/UPDATE';
-const REMOVE = 'notes-demo/notes/REMOVE';
+// Action types
+type TCreateNote = $ReadOnly<{|
+  type: 'CREATE',
+  payload: { title: ?string, text: string, color: ?string, category: ?TId },
+|}>;
+
+type TUpdateNote = $ReadOnly<{|
+  type: 'UPDATE',
+  payload: { noteId: string, title: ?string, text: string, color: ?string, category: ?TId },
+|}>;
+
+type TRemoveNote = $ReadOnly<{|
+  type: 'REMOVE',
+  payload: {
+    noteId: TId,
+  },
+|}>;
+
+export type TAction =
+  | TCreateNote
+  | TUpdateNote
+  | TRemoveNote;
+
 
 // Action Creators
 export function createNote(
@@ -18,8 +38,8 @@ export function createNote(
     color: ?string,
     category: ?TId,
   },
-): TAction {
-  return { type: CREATE, payload };
+): TCreateNote {
+  return { type: 'CREATE', payload };
 }
 
 export function updateNote(
@@ -30,16 +50,12 @@ export function updateNote(
     color: ?string,
     category: ?TId,
   },
-): TAction {
-  return { type: UPDATE, payload };
+): TUpdateNote {
+  return { type: 'UPDATE', payload };
 }
 
-export function removeNote(
-  payload: {
-    noteId: TId,
-  },
-): TAction {
-  return { type: REMOVE, payload };
+export function removeNote(payload: { noteId: TId }): TRemoveNote {
+  return { type: 'REMOVE', payload };
 }
 
 // Default state
@@ -70,7 +86,12 @@ export const defaultState: TNotes = [
 // Reducer
 export default function reducer(state: TNotes = defaultState, action: TAction): TNotes {
   switch (action.type) {
-    // do reducer stuff
+    case 'CREATE':
+      return create(state, action.payload);
+    case 'UPDATE':
+      return update(state, action.payload);
+    case 'REMOVE':
+      return remove(state, action.payload);
     default:
       return state;
   }

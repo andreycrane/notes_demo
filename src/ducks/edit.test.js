@@ -6,7 +6,7 @@ import editReducer, {
   closeEdit,
 } from './edit';
 
-describe('ducks/edit', () => {
+describe('ducks/edit#reducer', () => {
   it('sets "NEW" edit mode', () => {
     const action = editNew('NOTE');
     const newState = editReducer(defaultState, action);

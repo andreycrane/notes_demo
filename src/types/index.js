@@ -31,8 +31,3 @@ export type TState = $ReadOnly<{|
   categories: TCategories,
   edit: TEdit
 |}>;
-
-export type TAction = $ReadOnly<{|
-  type: string,
-  payload: mixed
-|}>;
