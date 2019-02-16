@@ -10,6 +10,11 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
+  },
   "keywords": [
     "demo",
     "rect",
@@ -39,6 +44,7 @@
     "flow-bin": "^0.92.1",
     "flow-typed": "^2.5.1",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^1.3.1",
     "jest": "^24.1.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.3",
