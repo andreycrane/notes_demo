@@ -2,23 +2,22 @@
 
 import { lorem, internet } from 'faker';
 
-import type { TId, TNotes } from '../types';
-import { create, update, remove } from '../core/notes';
+import type { TId, TNotes, TNote } from '../types';
 import id from '../lib/id';
 
 // Action types
 type TCreateNote = $ReadOnly<{|
-  type: 'CREATE',
+  type: 'NOTES_CREATE',
   payload: { title: ?string, text: string, color: ?string, category: ?TId },
 |}>;
 
 type TUpdateNote = $ReadOnly<{|
-  type: 'UPDATE',
+  type: 'NOTES_UPDATE',
   payload: { noteId: string, title: ?string, text: string, color: ?string, category: ?TId },
 |}>;
 
 type TRemoveNote = $ReadOnly<{|
-  type: 'REMOVE',
+  type: 'NOTES_REMOVE',
   payload: {
     noteId: TId,
   },
@@ -39,7 +38,7 @@ export function createNote(
     category: ?TId,
   },
 ): TCreateNote {
-  return { type: 'CREATE', payload };
+  return { type: 'NOTES_CREATE', payload };
 }
 
 export function updateNote(
@@ -51,11 +50,11 @@ export function updateNote(
     category: ?TId,
   },
 ): TUpdateNote {
-  return { type: 'UPDATE', payload };
+  return { type: 'NOTES_UPDATE', payload };
 }
 
 export function removeNote(payload: { noteId: TId }): TRemoveNote {
-  return { type: 'REMOVE', payload };
+  return { type: 'NOTES_REMOVE', payload };
 }
 
 // Default state
@@ -85,14 +84,52 @@ export const defaultState: TNotes = [
 
 // Reducer
 export default function reducer(state: TNotes = defaultState, action: TAction): TNotes {
-  switch (action.type) {
-    case 'CREATE':
-      return create(state, action.payload);
-    case 'UPDATE':
-      return update(state, action.payload);
-    case 'REMOVE':
-      return remove(state, action.payload);
-    default:
-      return state;
+  if (action.type === 'NOTES_CREATE') {
+    const {
+      title, text, color, category,
+    } = action.payload;
+
+    return [
+      {
+        id: id(),
+        title,
+        text,
+        color,
+        category,
+      },
+      ...state,
+    ];
   }
+
+  if (action.type === 'NOTES_UPDATE') {
+    const {
+      noteId,
+      title,
+      text,
+      color,
+      category,
+    } = action.payload;
+
+    return state.map((n: TNote): TNote => {
+      if (n.id !== noteId) {
+        return n;
+      }
+
+      return {
+        ...n,
+        title,
+        text,
+        color,
+        category,
+      };
+    });
+  }
+
+  if (action.type === 'NOTES_REMOVE') {
+    const { noteId } = action.payload;
+
+    return state.filter((n: TNote): boolean => n.id !== noteId);
+  }
+
+  return state;
 }
