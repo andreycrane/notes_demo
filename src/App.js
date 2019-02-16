@@ -6,12 +6,14 @@ import {
   Row,
 } from 'reactstrap';
 
+import type { Node } from 'react';
+
 import Sidebar from './components/Sidebar';
 import TopBar from './components/TopBar';
 import NotesList from './components/NotesList';
 import EditModal from './components/EditModal';
 
-export default function App() {
+export default function App(): Node {
   const style = {
     paddingTop: '56px',
   };

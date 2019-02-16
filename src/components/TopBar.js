@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-
 import {
   Navbar,
   NavbarBrand,
@@ -9,7 +8,9 @@ import {
   Button,
 } from 'reactstrap';
 
-export default function TopBar() {
+import type { Node } from 'react';
+
+export default function TopBar(): Node {
   return (
     <Navbar
       dark

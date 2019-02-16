@@ -1,26 +1,25 @@
 // @flow
 
 import React from 'react';
-
 import {
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
   Button,
-
   Form,
   FormGroup,
   Label,
   Input,
 } from 'reactstrap';
 
+import type { Node } from 'react';
 
 type Props = {
   isOpen: boolean
 };
 
-export default function EditModal({ isOpen }: Props) {
+export default function EditModal({ isOpen }: Props): Node {
   return (
     <Modal isOpen={isOpen}>
       <ModalHeader>Modal title</ModalHeader>

@@ -1,14 +1,15 @@
 // @flow
 
 import React from 'react';
-
 import {
   Col,
   ListGroup,
   ListGroupItem,
 } from 'reactstrap';
 
-export default function Sidebar() {
+import type { Node } from 'react';
+
+export default function Sidebar(): Node {
   const style = {
     position: 'fixed',
     top: 0,

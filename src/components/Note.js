@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-
 import {
   Card,
   CardImg,
@@ -11,8 +10,11 @@ import {
   CardSubtitle,
   Button,
 } from 'reactstrap';
+import { lorem } from 'faker';
 
-export default function Note() {
+import type { Node } from 'react';
+
+export default function Note(): Node {
   return (
     <Card color="success">
       <CardImg
@@ -29,9 +31,7 @@ export default function Note() {
           Card subtitle
         </CardSubtitle>
         <CardText>
-          Some quick example text to build
-          on the card title and make up
-          the bulk of the card's content.
+          {lorem.paragraph()}
         </CardText>
         <Button>Button</Button>
       </CardBody>

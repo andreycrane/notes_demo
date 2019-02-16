@@ -1,15 +1,16 @@
 // @flow
 
 import React from 'react';
-
 import {
   Row,
   Col,
 } from 'reactstrap';
 
+import type { Node } from 'react';
+
 import Note from './Note';
 
-export default function NotesList() {
+export default function NotesList(): Node {
   return (
     <Col
       lg={10}
