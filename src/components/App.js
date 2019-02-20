@@ -8,10 +8,9 @@ import {
 
 import type { Node } from 'react';
 
-import Sidebar from './components/Sidebar';
-import TopBar from './components/TopBar';
-import NotesList from './components/NotesList';
-import EditModal from './components/EditModal';
+import Sidebar from './Sidebar';
+import TopBar from './TopBar';
+import NotesList from './NotesList';
 
 export default function App(): Node {
   const style = {
@@ -28,7 +27,6 @@ export default function App(): Node {
         >
           <Sidebar />
           <NotesList />
-          <EditModal isOpen />
         </Row>
       </Container>
     </React.Fragment>

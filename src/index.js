@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import App from './App';
+import App from './components/App';
 import configureStore from './configureStore';
 import defaultState from './default-state';
 
