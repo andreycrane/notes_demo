@@ -3,37 +3,54 @@
 import React from 'react';
 import {
   Card,
-  CardImg,
   CardText,
   CardBody,
   CardTitle,
-  CardSubtitle,
   Button,
 } from 'reactstrap';
-import { lorem } from 'faker';
-
+import {
+  IoMdCreate,
+  IoMdRemoveCircleOutline,
+} from 'react-icons/io';
 import type { Node } from 'react';
 
-export default function Note(): Node {
+import type { TId, TNote } from '../../../types';
+
+export type TProps = {
+  note: TNote,
+  edit: (id: TId) => void,
+  remove: (id: TId) => void,
+};
+
+export default function Note(props: TProps): Node {
+  const { note, edit, remove } = props;
+
+  const removeHandler = (): void => remove(note.id);
+  const editHandler = (): void => edit(note.id);
+
   return (
-    <Card color="success">
-      <CardImg
-        top
-        width="100%"
-        src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
-        alt="Card image cap"
-      />
+    <Card>
       <CardBody>
-        <CardTitle>
-          Card title
+        <CardTitle tag="h5">
+          {note.title}
         </CardTitle>
-        <CardSubtitle>
-          Card subtitle
-        </CardSubtitle>
         <CardText>
-          {lorem.paragraph()}
+          {note.text}
         </CardText>
-        <Button>Button</Button>
+        <Button
+          close
+          className="float-right ml-2"
+          onClick={editHandler}
+        >
+          <IoMdCreate />
+        </Button>
+        <Button
+          close
+          className="float-right ml-2"
+          onClick={removeHandler}
+        >
+          <IoMdRemoveCircleOutline />
+        </Button>
       </CardBody>
     </Card>
   );
