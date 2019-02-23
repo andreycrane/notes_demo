@@ -11,6 +11,7 @@ import type { Node } from 'react';
 import Sidebar from './Sidebar';
 import TopBar from './TopBar';
 import NotesList from './NotesList';
+import EditModal from './EditModal';
 
 export default function App(): Node {
   const style = {
@@ -27,6 +28,7 @@ export default function App(): Node {
         >
           <Sidebar />
           <NotesList />
+          <EditModal />
         </Row>
       </Container>
     </React.Fragment>

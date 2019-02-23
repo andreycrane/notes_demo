@@ -1,6 +1,5 @@
 import { lorem, random } from 'faker';
 
-
 import categoriesReducer, {
   defaultState,
   createCategory,
