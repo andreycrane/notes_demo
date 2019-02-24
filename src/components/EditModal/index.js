@@ -7,6 +7,9 @@ import type { Node } from 'react';
 
 import CategoryModal from './components/CategoryModal';
 import NoteModal from './components/NoteModal';
+import {
+  defaultState as categories,
+} from '../../ducks/categories';
 
 export function EditModal(): Node {
   return (
@@ -18,8 +21,9 @@ export function EditModal(): Node {
         title: 'test',
         text: 'test-test',
         color: '#ffffff',
-        category: null,
+        category: undefined,
       }}
+      categories={categories}
       onSave={(...rest): void => console.log(rest)}
       onCancel={(...rest): void => console.log(rest)}
     />

@@ -5,7 +5,6 @@ import {
   Form,
   FormGroup,
   Label,
-  Input,
   Button,
   FormFeedback,
 } from 'reactstrap';
@@ -16,12 +15,13 @@ import {
 } from 'formik';
 
 import type { Node } from 'react';
-import type { TNote } from '../../../types';
+import type { TNote, TCategories } from '../../../types';
 
 import FormikInput from './FormikInput';
 
 export type TProps = $ReadOnly<{|
   note: TNote,
+  categories: TCategories,
   onSave: (note: TNote) => void,
   onCancel: () => void,
 |}>;
@@ -38,9 +38,21 @@ export function validate({ name }: { name?: string }): mixed {
   return errors;
 }
 
+export function DefaultCategoryOption(): Node {
+  return (
+    <option key="wasn\'t selected" value="undefined">
+      --Please choose an option--
+    </option>
+  );
+}
 
 export default function NoteForm(props: TProps): Node {
-  const { note, onSave, onCancel } = props;
+  const {
+    note,
+    categories,
+    onSave,
+    onCancel,
+  } = props;
 
   function onSubmit(values, actions) {
     actions.setSubmitting(false);
@@ -75,12 +87,18 @@ export default function NoteForm(props: TProps): Node {
           </FormGroup>
           <FormGroup>
             <Label for="category">Category</Label>
-            <Field name="category" type="select" component={FormikInput}>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+            <Field
+              name="category"
+              type="select"
+              component={FormikInput}
+              defaultValue={undefined}
+            >
+              <DefaultCategoryOption />
+              {categories.map(({ id, name }): Node => (
+                <option key={id} value={id}>
+                  {name}
+                </option>
+              ))}
             </Field>
             <ErrorMessage component={FormFeedback} name="color" />
           </FormGroup>

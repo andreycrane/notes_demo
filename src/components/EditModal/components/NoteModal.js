@@ -3,7 +3,7 @@
 import React from 'react';
 
 import type { Node } from 'react';
-import type { TNote } from '../../../types';
+import type { TNote, TCategories } from '../../../types';
 
 import ModalWrapper from './ModalWrapper';
 import NoteForm from './NoteForm';
@@ -12,6 +12,7 @@ export type TProps = {
   title: string,
   isOpen: boolean,
   note: TNote,
+  categories: TCategories,
   onSave: (note: TNote) => void,
   onCancel: () => void
 };
@@ -21,6 +22,7 @@ export default function NoteModal(props: TProps): Node {
     title,
     isOpen,
     note,
+    categories,
     onSave,
     onCancel,
   } = props;
@@ -32,6 +34,7 @@ export default function NoteModal(props: TProps): Node {
     >
       <NoteForm
         note={note}
+        categories={categories}
         onSave={onSave}
         onCancel={onCancel}
       />
