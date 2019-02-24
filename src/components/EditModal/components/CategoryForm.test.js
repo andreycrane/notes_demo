@@ -12,10 +12,10 @@ describe('CategoryForm', () => {
     id: random.uuid(),
     name: lorem.word(),
   };
-  const onSave = jest.fn();
   const onCancel = jest.fn();
 
   it('renders', () => {
+    const onSave = jest.fn();
     const wrapper = mount(
       <CategoryForm
         category={category}
@@ -28,6 +28,7 @@ describe('CategoryForm', () => {
   });
 
   it('renders "name" in input', () => {
+    const onSave = jest.fn();
     const wrapper = mount(
       <CategoryForm
         category={category}
@@ -42,7 +43,10 @@ describe('CategoryForm', () => {
   });
 
   it('calls "onSave" callback when "Save" button was pressed', async () => {
-    onSave.mockClear();
+    const onSave = jest.fn(async () => {
+      await expect(onSave).toBeCalled();
+    });
+
     const wrapper = mount(
       <CategoryForm
         category={category}
@@ -54,14 +58,11 @@ describe('CategoryForm', () => {
     const button = wrapper.find('button.js-btn-save');
     expect(button.length).toBe(1);
     button.simulate('submit');
-
-    await new Promise(resolve => setTimeout(resolve, 0));
-
-    expect(onSave).toBeCalled();
   });
 
   it('calls "onCancel" callback when "Cancel" button was pressed', () => {
     onCancel.mockClear();
+    const onSave = jest.fn();
     const wrapper = mount(
       <CategoryForm
         category={category}
@@ -77,9 +78,15 @@ describe('CategoryForm', () => {
     expect(onCancel).toBeCalled();
   });
 
-  it('passes actual "name" to "onSave" callback', async () => {
+  it('passes actual "name" to "onSave" callback', () => {
     const newValue = lorem.word();
-    onSave.mockClear();
+    const onSave = jest.fn(async () => {
+      await expect(onSave).toHaveBeenCalledWith({
+        ...category,
+        name: newValue,
+      });
+    });
+
     const wrapper = mount(
       <CategoryForm
         category={category}
@@ -103,16 +110,10 @@ describe('CategoryForm', () => {
       },
     );
     button.simulate('submit');
-
-    await new Promise(resolve => setTimeout(resolve, 0));
-    expect(onSave).toHaveBeenCalledTimes(1);
-    expect(onSave).toHaveBeenCalledWith({
-      ...category,
-      name: newValue,
-    });
   });
 
   it('shows error message if "name" isn\'t valid', async () => {
+    const onSave = jest.fn();
     const wrapper = mount(
       <CategoryForm
         category={category}

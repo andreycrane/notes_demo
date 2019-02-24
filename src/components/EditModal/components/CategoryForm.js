@@ -4,7 +4,6 @@ import React from 'react';
 import {
   FormGroup,
   Label,
-  Input,
   Button,
   Form,
   FormFeedback,
@@ -18,19 +17,14 @@ import {
 import type { Node } from 'react';
 import type { TCategory } from '../../../types';
 
+import FormikTextInput from './FormikTextInput';
+
 export type TProps = $ReadOnly<{|
   category: TCategory,
   onSave: (category: TCategory) => void,
   onCancel: () => void,
 |}>;
 
-const FormikTextInput = ({ field, form, ...props }): Node => (
-  <Input
-    invalid={!!(form.touched[field.name] && form.errors[field.name])}
-    {...field}
-    {...props}
-  />
-);
 
 // Synchronous validation
 function validate({ name }): mixed {

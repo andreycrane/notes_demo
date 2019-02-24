@@ -1,18 +1,22 @@
 import { lorem, random } from 'faker';
 
-import categoriesReducer, {
-  defaultState,
-  createCategory,
-  updateCategory,
-  removeCategory,
-} from './categories';
-
-const mockId = random.uuid();
-const name = lorem.word();
-
-jest.mock('../lib/id', () => jest.fn(() => mockId));
-
 describe('ducks/categories#reducer', () => {
+  const mockId = random.uuid();
+  const name = lorem.word();
+
+  const mockIdFn = jest.fn(() => random.uuid());
+  jest.doMock('../lib/id', () => mockIdFn);
+
+  const {
+    default: categoriesReducer,
+    defaultState,
+    createCategory,
+    updateCategory,
+    removeCategory,
+  } = require('./categories');
+
+  mockIdFn.mockImplementation(() => mockId);
+
   it('creates new category', () => {
     const action = createCategory({ name });
     const newState = categoriesReducer(defaultState, action);

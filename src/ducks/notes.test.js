@@ -1,20 +1,24 @@
 import { lorem, internet, random } from 'faker';
 
-import notesReducer, {
-  defaultState,
-  createNote,
-  updateNote,
-  removeNote,
-} from './notes';
-
-const mockId = random.uuid();
-const title = lorem.sentence();
-const text = lorem.text();
-const color = internet.color();
-
-jest.mock('../lib/id', () => jest.fn(() => mockId));
-
 describe('ducks/notes#reducer', () => {
+  const mockId = random.uuid();
+  const title = lorem.sentence();
+  const text = lorem.text();
+  const color = internet.color();
+
+  const mockIdFn = jest.fn(() => random.uuid());
+  jest.doMock('../lib/id', () => mockIdFn);
+
+  const {
+    default: notesReducer,
+    defaultState,
+    createNote,
+    updateNote,
+    removeNote,
+  } = require('./notes');
+
+  mockIdFn.mockImplementation(() => mockId);
+
   it('creates new note', () => {
     const action = createNote({ title, text, color });
     const newState = notesReducer(defaultState, action);
