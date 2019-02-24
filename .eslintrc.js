@@ -29,7 +29,10 @@ module.exports = {
     "flowtype/require-return-type": [2, "always"],
   },
   "overrides": {
-    "files": ["*.test.js"],
+    "files": [
+      "setupTests.js",
+      "*.test.js"
+    ],
     "settings": {
       "flowtype": {
         "onlyFilesWithFlowAnnotation": true
