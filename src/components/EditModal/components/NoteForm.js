@@ -2,10 +2,11 @@
 
 import React from 'react';
 import {
+  Form,
   FormGroup,
   Label,
+  Input,
   Button,
-  Form,
   FormFeedback,
 } from 'reactstrap';
 import {
@@ -15,16 +16,15 @@ import {
 } from 'formik';
 
 import type { Node } from 'react';
-import type { TCategory } from '../../../types';
+import type { TNote } from '../../../types';
 
 import FormikInput from './FormikInput';
 
 export type TProps = $ReadOnly<{|
-  category: TCategory,
-  onSave: (category: TCategory) => void,
+  note: TNote,
+  onSave: (note: TNote) => void,
   onCancel: () => void,
 |}>;
-
 
 // Synchronous validation
 export function validate({ name }: { name?: string }): mixed {
@@ -38,8 +38,9 @@ export function validate({ name }: { name?: string }): mixed {
   return errors;
 }
 
-export default function CategoryForm(props: TProps): Node {
-  const { category, onCancel, onSave } = props;
+
+export default function NoteForm(props: TProps): Node {
+  const { note, onSave, onCancel } = props;
 
   function onSubmit(values, actions) {
     actions.setSubmitting(false);
@@ -48,7 +49,7 @@ export default function CategoryForm(props: TProps): Node {
 
   return (
     <Formik
-      initialValues={category}
+      initialValues={note}
       onSubmit={onSubmit}
       validate={validate}
     >
@@ -58,9 +59,30 @@ export default function CategoryForm(props: TProps): Node {
           onReset={handleReset}
         >
           <FormGroup>
-            <Label for="name">Category name</Label>
-            <Field name="name" type="text" component={FormikInput} />
-            <ErrorMessage component={FormFeedback} name="name" />
+            <Label for="title">Title</Label>
+            <Field name="title" type="text" component={FormikInput} />
+            <ErrorMessage component={FormFeedback} name="title" />
+          </FormGroup>
+          <FormGroup>
+            <Label for="text">Text</Label>
+            <Field name="text" type="textarea" component={FormikInput} />
+            <ErrorMessage component={FormFeedback} name="text" />
+          </FormGroup>
+          <FormGroup>
+            <Label for="color">Color</Label>
+            <Field name="color" type="color" component={FormikInput} />
+            <ErrorMessage component={FormFeedback} name="color" />
+          </FormGroup>
+          <FormGroup>
+            <Label for="category">Category</Label>
+            <Field name="category" type="select" component={FormikInput}>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </Field>
+            <ErrorMessage component={FormFeedback} name="color" />
           </FormGroup>
           <Button
             color="secondary"

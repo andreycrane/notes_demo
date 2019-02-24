@@ -6,13 +6,20 @@ import { connect } from 'react-redux';
 import type { Node } from 'react';
 
 import CategoryModal from './components/CategoryModal';
+import NoteModal from './components/NoteModal';
 
 export function EditModal(): Node {
   return (
-    <CategoryModal
+    <NoteModal
       isOpen
       title="Hey"
-      category={{ id: 'eba', name: 'test' }}
+      note={{
+        id: 'eba',
+        title: 'test',
+        text: 'test-test',
+        color: '#ffffff',
+        category: null,
+      }}
       onSave={(...rest): void => console.log(rest)}
       onCancel={(...rest): void => console.log(rest)}
     />

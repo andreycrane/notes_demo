@@ -13,14 +13,27 @@ export type TProps = $ReadOnly<{
     errors: { [string]: string },
     touched: { [string]: string },
   },
+  type: 'text' | 'textarea' | 'select' | 'color',
+  children: ?(Node | $ReadOnlyArray<Node>),
 }>;
 
-export default function FormikTextInput({ field, form, ...props }: TProps): Node {
+export default function FormikInput(
+  {
+    field,
+    form,
+    type,
+    children,
+    ...props
+  }: TProps,
+): Node {
   return (
     <Input
       invalid={!!(form.touched[field.name] && form.errors[field.name])}
+      type={type}
       {...field}
       {...props}
-    />
+    >
+      {children}
+    </Input>
   );
 }
