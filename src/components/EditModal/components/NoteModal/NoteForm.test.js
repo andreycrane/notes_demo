@@ -6,7 +6,7 @@ import NoteForm from './NoteForm';
 
 import {
   defaultState as categories,
-} from '../../../ducks/categories';
+} from '../../../../ducks/categories';
 
 describe('NoteForm', () => {
   const note = {

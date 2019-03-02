@@ -5,6 +5,7 @@ import {
   ListGroupItem,
   Button,
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import {
   IoMdCreate,
   IoMdRemoveCircleOutline,
@@ -33,7 +34,9 @@ export default function CategoryItem(props: TProps): Node {
         className="float-right ml-2"
         onClick={handleEdit}
       >
-        <IoMdCreate />
+        <Link to={`/categories/edit/${category.id}`}>
+          <IoMdCreate />
+        </Link>
       </Button>
       <Button
         close

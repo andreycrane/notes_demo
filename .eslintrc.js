@@ -8,25 +8,26 @@ module.exports = {
     "flowtype"
   ],
   "env": {
+    "es6": true,
     "browser": true,
     "jest": true
   },
   "rules": {
     "react/jsx-filename-extension": [
-      2,
+      "error",
       {
         "extensions": [".js", ".jsx"]
       }
     ],
     "flowtype/require-valid-file-annotation": [
-      2,
+      "error",
       "always",
       {
          "annotationStyle": "line"
       }
     ],
-    "flowtype/no-weak-types": [2],
-    "flowtype/require-return-type": [2, "always"],
+    "flowtype/no-weak-types": ["error"],
+    "flowtype/require-return-type": ["error", "always"],
   },
   "overrides": {
     "files": [
@@ -37,6 +38,9 @@ module.exports = {
       "flowtype": {
         "onlyFilesWithFlowAnnotation": true
       }
+    },
+    "rules": {
+      "global-require": "off"
     }
   }
 };

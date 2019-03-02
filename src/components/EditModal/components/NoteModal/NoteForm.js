@@ -15,9 +15,9 @@ import {
 } from 'formik';
 
 import type { Node } from 'react';
-import type { TNote, TCategories } from '../../../types';
+import type { TNote, TCategories } from '../../../../types';
 
-import FormikInput from './FormikInput';
+import FormikInput from '../FormikInput';
 
 export type TProps = $ReadOnly<{|
   note: TNote,

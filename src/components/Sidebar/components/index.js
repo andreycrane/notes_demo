@@ -2,6 +2,7 @@
 
 import React from 'react';
 import type { Node } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Col,
   ListGroup,
@@ -55,7 +56,9 @@ export default function Sidebar(props: TProps): Node {
           className="float-right"
           onClick={add}
         >
-          <IoMdAddCircleOutline />
+          <Link to="/categories/create">
+            <IoMdAddCircleOutline />
+          </Link>
         </Button>
       </h4>
       <ListGroup>

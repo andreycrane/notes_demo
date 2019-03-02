@@ -3,22 +3,22 @@
 import { lorem } from 'faker';
 
 import type { TId, TCategories, TCategory } from '../types';
-import id from '../lib/id';
+import genId from '../lib/id';
 
 // Action types
 type TCreateCategory = $ReadOnly<{|
   type: 'CATEGORIES_CREATE',
-  payload: { name: string },
+  payload: $ReadOnly<{ name: string }>,
 |}>;
 
 type TUpdateCategory = $ReadOnly<{|
   type: 'CATEGORIES_UPDATE',
-  payload: { categoryId: string, name: string },
+  payload: $ReadOnly<{ id: string, name: string }>,
 |}>;
 
 type TRemoveCategory = $ReadOnly<{|
   type: 'CATEGORIES_REMOVE',
-  payload: { categoryId: TId },
+  payload: { id: TId },
 |}>;
 
 export type TAction =
@@ -28,15 +28,15 @@ export type TAction =
 
 
 // Action Creators
-export function createCategory(payload: { name: string }): TCreateCategory {
+export function createCategory(payload: { +name: string }): TCreateCategory {
   return { type: 'CATEGORIES_CREATE', payload };
 }
 
-export function updateCategory(payload: { categoryId: string, name: string }): TUpdateCategory {
+export function updateCategory(payload: { +id: string, +name: string }): TUpdateCategory {
   return { type: 'CATEGORIES_UPDATE', payload };
 }
 
-export function removeCategory(payload: { categoryId: TId }): TRemoveCategory {
+export function removeCategory(payload: { id: TId }): TRemoveCategory {
   return { type: 'CATEGORIES_REMOVE', payload };
 }
 
@@ -44,15 +44,15 @@ export function removeCategory(payload: { categoryId: TId }): TRemoveCategory {
 // Default state
 export const defaultState: TCategories = [
   {
-    id: id(),
+    id: genId(),
     name: lorem.word(),
   },
   {
-    id: id(),
+    id: genId(),
     name: lorem.word(),
   },
   {
-    id: id(),
+    id: genId(),
     name: lorem.word(),
   },
 ];
@@ -62,16 +62,16 @@ export const defaultState: TCategories = [
 export default function reducer(state: TCategories = defaultState, action: TAction): TCategories {
   if (action.type === 'CATEGORIES_CREATE') {
     return [
-      { id: id(), name: action.payload.name },
+      { id: genId(), name: action.payload.name },
       ...state,
     ];
   }
 
   if (action.type === 'CATEGORIES_UPDATE') {
-    const { categoryId, name } = action.payload;
+    const { id, name } = action.payload;
 
     return state.map((c: TCategory): TCategory => {
-      if (c.id !== categoryId) {
+      if (c.id !== id) {
         return c;
       }
 
@@ -80,9 +80,9 @@ export default function reducer(state: TCategories = defaultState, action: TActi
   }
 
   if (action.type === 'CATEGORIES_REMOVE') {
-    const { categoryId } = action.payload;
+    const { id } = action.payload;
 
-    return state.filter((c: TCategory): boolean => c.id !== categoryId);
+    return state.filter((c: TCategory): boolean => c.id !== id);
   }
 
   return state;

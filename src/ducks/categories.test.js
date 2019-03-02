@@ -32,7 +32,7 @@ describe('ducks/categories#reducer', () => {
     const prevState = categoriesReducer(defaultState, createAction);
     const newName = lorem.word();
     const updateAction = updateCategory({
-      categoryId: mockId,
+      id: mockId,
       name: newName,
     });
     const newState = categoriesReducer(prevState, updateAction);
@@ -46,7 +46,7 @@ describe('ducks/categories#reducer', () => {
   it('removes existing category', () => {
     const createAction = createCategory({ name });
     const prevState = categoriesReducer(defaultState, createAction);
-    const removeAction = removeCategory({ categoryId: mockId });
+    const removeAction = removeCategory({ id: mockId });
     const newState = categoriesReducer(prevState, removeAction);
     const expected = [{ id: mockId, name }];
 

@@ -3,9 +3,9 @@
 import React from 'react';
 
 import type { Node } from 'react';
-import type { TNote, TCategories } from '../../../types';
+import type { TNote, TCategories } from '../../../../types';
 
-import ModalWrapper from './ModalWrapper';
+import ModalWrapper from '../ModalWrapper';
 import NoteForm from './NoteForm';
 
 export type TProps = {

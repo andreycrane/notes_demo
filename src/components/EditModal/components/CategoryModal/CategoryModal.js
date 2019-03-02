@@ -2,25 +2,23 @@
 
 import React from 'react';
 
-
 import type { Node } from 'react';
-import type { TCategory } from '../../../types';
 
-import ModalWrapper from './ModalWrapper';
+import ModalWrapper from '../ModalWrapper';
 import CategoryForm from './CategoryForm';
+
+import type { TCategory } from '../../../../types';
 
 export type TProps = {
   title: string,
-  isOpen: boolean,
   category: TCategory,
   onSave: (category: TCategory) => void,
-  onCancel: () => void
+  onCancel: () => void,
 };
 
 export default function CategoryModal(props: TProps): Node {
   const {
     title,
-    isOpen,
     category,
     onSave,
     onCancel,
@@ -29,7 +27,7 @@ export default function CategoryModal(props: TProps): Node {
   return (
     <ModalWrapper
       title={title}
-      isOpen={isOpen}
+      isOpen
     >
       <CategoryForm
         category={category}
