@@ -7,6 +7,7 @@ import {
   Input,
   Button,
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 import type { Node } from 'react';
 
@@ -23,11 +24,13 @@ export default function TopBar(): Node {
         type="text"
         className="bg-dark text-light mr-2 rounded-0"
       />
-      <Button
-        color="primary rounded-0"
-      >
-        New
-      </Button>
+      <Link to="/notes/create">
+        <Button
+          color="primary rounded-0"
+        >
+            New
+        </Button>
+      </Link>
     </Navbar>
   );
 }

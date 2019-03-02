@@ -64,21 +64,21 @@ export const defaultState: TNotes = [
     title: lorem.sentence(),
     text: lorem.text(),
     color: internet.color(),
-    category: null,
+    category: undefined,
   },
   {
     id: id(),
     title: lorem.sentence(),
     text: lorem.text(),
     color: internet.color(),
-    category: null,
+    category: undefined,
   },
   {
     id: id(),
     title: lorem.sentence(),
     text: lorem.text(),
     color: internet.color(),
-    category: null,
+    category: undefined,
   },
 ];
 

@@ -27,13 +27,8 @@ export type TProps = $ReadOnly<{|
 |}>;
 
 // Synchronous validation
-export function validate({ name }: { name?: string }): mixed {
+export function validate(): mixed {
   const errors = {};
-  if (!name) {
-    errors.name = 'Required';
-  } else if (name.length < 3 || name.length > 50) {
-    errors.name = 'Field "name" must be between 3 and 50 characters';
-  }
 
   return errors;
 }
