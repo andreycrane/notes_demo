@@ -46,7 +46,7 @@ export default function Note(props: TProps): Node {
         </Button>
         <Button
           close
-          className="float-right ml-2"
+          className="js-remove-btn float-right ml-2"
           onClick={removeHandler}
         >
           <IoMdRemoveCircleOutline />
