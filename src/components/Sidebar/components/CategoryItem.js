@@ -16,14 +16,12 @@ import type { TId, TCategory } from '../../../types';
 
 export type TProps = {
   category: TCategory,
-  edit: (id: TId) => void,
   remove: (id: TId) => void
 };
 
 export default function CategoryItem(props: TProps): Node {
-  const { category, edit, remove } = props;
+  const { category, remove } = props;
 
-  const handleEdit = (): void => edit(category.id);
   const handleRemove = (): void => remove(category.id);
 
   return (
@@ -32,7 +30,6 @@ export default function CategoryItem(props: TProps): Node {
       <Button
         close
         className="float-right ml-2"
-        onClick={handleEdit}
       >
         <Link to={`/categories/edit/${category.id}`}>
           <IoMdCreate />

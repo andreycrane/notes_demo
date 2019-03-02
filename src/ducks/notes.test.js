@@ -39,7 +39,7 @@ describe('ducks/notes#reducer', () => {
     const prevState = notesReducer(defaultState, createAction);
     const newTitle = lorem.word();
     const updateAction = updateNote({
-      noteId: mockId,
+      id: mockId,
       title: newTitle,
       text,
       color,
@@ -60,7 +60,7 @@ describe('ducks/notes#reducer', () => {
   it('removes existing', () => {
     const createAction = createNote({ title, text, color });
     const prevState = notesReducer(defaultState, createAction);
-    const removeAction = removeNote({ noteId: mockId });
+    const removeAction = removeNote({ id: mockId });
     const newState = notesReducer(prevState, removeAction);
     const expected = [{
       id: mockId,

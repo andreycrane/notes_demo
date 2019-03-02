@@ -18,15 +18,13 @@ import type { TId, TNote } from '../../../types';
 
 export type TProps = {
   note: TNote,
-  edit: (id: TId) => void,
   remove: (id: TId) => void,
 };
 
 export default function Note(props: TProps): Node {
-  const { note, edit, remove } = props;
+  const { note, remove } = props;
 
   const removeHandler = (): void => remove(note.id);
-  const editHandler = (): void => edit(note.id);
 
   return (
     <Card>
@@ -40,7 +38,6 @@ export default function Note(props: TProps): Node {
         <Button
           close
           className="float-right ml-2"
-          onClick={editHandler}
         >
           <IoMdCreate />
         </Button>

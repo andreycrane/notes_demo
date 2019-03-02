@@ -20,18 +20,11 @@ import type {
 
 export type TProps = {
   categories: TCategories,
-  add: () => void,
-  edit: (id: TId) => void,
   remove: (id: TId) => void
 };
 
 export default function Sidebar(props: TProps): Node {
-  const {
-    categories,
-    edit,
-    remove,
-    add,
-  } = props;
+  const { categories, remove } = props;
 
   const style = {
     position: 'fixed',
@@ -54,7 +47,6 @@ export default function Sidebar(props: TProps): Node {
         <Button
           close
           className="float-right"
-          onClick={add}
         >
           <Link to="/categories/create">
             <IoMdAddCircleOutline />
@@ -66,7 +58,6 @@ export default function Sidebar(props: TProps): Node {
           <CategoryItem
             key={c.id}
             category={c}
-            edit={edit}
             remove={remove}
           />
         ))}

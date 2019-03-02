@@ -13,13 +13,13 @@ type TCreateNote = $ReadOnly<{|
 
 type TUpdateNote = $ReadOnly<{|
   type: 'NOTES_UPDATE',
-  payload: { noteId: string, title: ?string, text: string, color: ?string, category: ?TId },
+  payload: { id: string, title: ?string, text: string, color: ?string, category: ?TId },
 |}>;
 
 type TRemoveNote = $ReadOnly<{|
   type: 'NOTES_REMOVE',
   payload: {
-    noteId: TId,
+    id: TId,
   },
 |}>;
 
@@ -43,7 +43,7 @@ export function createNote(
 
 export function updateNote(
   payload: {
-    noteId: string,
+    id: string,
     title: ?string,
     text: string,
     color: ?string,
@@ -53,7 +53,7 @@ export function updateNote(
   return { type: 'NOTES_UPDATE', payload };
 }
 
-export function removeNote(payload: { noteId: TId }): TRemoveNote {
+export function removeNote(payload: { id: TId }): TRemoveNote {
   return { type: 'NOTES_REMOVE', payload };
 }
 
@@ -103,7 +103,7 @@ export default function reducer(state: TNotes = defaultState, action: TAction): 
 
   if (action.type === 'NOTES_UPDATE') {
     const {
-      noteId,
+      id: noteId,
       title,
       text,
       color,
@@ -126,7 +126,7 @@ export default function reducer(state: TNotes = defaultState, action: TAction): 
   }
 
   if (action.type === 'NOTES_REMOVE') {
-    const { noteId } = action.payload;
+    const { id: noteId } = action.payload;
 
     return state.filter((n: TNote): boolean => n.id !== noteId);
   }

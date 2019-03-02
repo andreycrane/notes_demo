@@ -14,12 +14,11 @@ import Note from './Note';
 
 export type TProps = {
   notes: TNotes,
-  edit: (id: TId) => void,
   remove: (id: TId) => void,
 };
 
 export default function NotesList(props: TProps): Node {
-  const { notes, edit, remove } = props;
+  const { notes, remove } = props;
 
   return (
     <Col
@@ -34,7 +33,6 @@ export default function NotesList(props: TProps): Node {
           >
             <Note
               note={n}
-              edit={edit}
               remove={remove}
             />
           </Col>
