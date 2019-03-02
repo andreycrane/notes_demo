@@ -12,7 +12,7 @@ export default function EditModal(): Node {
   return (
     <React.Fragment>
       <Route
-        path="/categories/:mode(edit)/:categoryId"
+        path="/categories/:mode(edit)/:id"
         component={CategoryModal}
       />
       <Route
@@ -20,7 +20,11 @@ export default function EditModal(): Node {
         component={CategoryModal}
       />
       <Route
-        path="/notes/edit/:categoryId"
+        path="/notes/:mode(edit)/:id"
+        component={NoteModal}
+      />
+      <Route
+        path="/notes/:mode(create)"
         component={NoteModal}
       />
     </React.Fragment>

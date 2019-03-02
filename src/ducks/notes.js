@@ -8,18 +8,18 @@ import id from '../lib/id';
 // Action types
 type TCreateNote = $ReadOnly<{|
   type: 'NOTES_CREATE',
-  payload: { title: ?string, text: string, color: ?string, category: ?TId },
+  payload: $ReadOnly<{ title: ?string, text: string, color: ?string, category: ?TId }>,
 |}>;
 
 type TUpdateNote = $ReadOnly<{|
   type: 'NOTES_UPDATE',
-  payload: { id: string, title: ?string, text: string, color: ?string, category: ?TId },
+  payload: $ReadOnly<{ id: string, title: ?string, text: string, color: ?string, category: ?TId }>,
 |}>;
 
 type TRemoveNote = $ReadOnly<{|
   type: 'NOTES_REMOVE',
   payload: {
-    id: TId,
+    +id: TId,
   },
 |}>;
 
@@ -31,29 +31,29 @@ export type TAction =
 
 // Action Creators
 export function createNote(
-  payload: {
+  payload: $ReadOnly<{
     title: ?string,
     text: string,
     color: ?string,
     category: ?TId,
-  },
+  }>,
 ): TCreateNote {
   return { type: 'NOTES_CREATE', payload };
 }
 
 export function updateNote(
-  payload: {
+  payload: $ReadOnly<{
     id: string,
     title: ?string,
     text: string,
     color: ?string,
     category: ?TId,
-  },
+  }>,
 ): TUpdateNote {
   return { type: 'NOTES_UPDATE', payload };
 }
 
-export function removeNote(payload: { id: TId }): TRemoveNote {
+export function removeNote(payload: { +id: TId }): TRemoveNote {
   return { type: 'NOTES_REMOVE', payload };
 }
 

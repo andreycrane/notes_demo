@@ -32,7 +32,8 @@ module.exports = {
   "overrides": {
     "files": [
       "setupTests.js",
-      "*.test.js"
+      "*.test.js",
+      "webpack.config.dev.js",
     ],
     "settings": {
       "flowtype": {

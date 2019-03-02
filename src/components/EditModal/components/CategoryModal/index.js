@@ -22,7 +22,7 @@ function mapStateToProps(state: TState, ownProps: TOwnProps): mixed {
     return {
       title: 'Изменить категорию',
       category: categories.find(
-        ((c: TCategory): boolean => c.id === params.categoryId),
+        ((c: TCategory): boolean => c.id === params.id),
       ),
     };
   }

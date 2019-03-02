@@ -8,6 +8,7 @@ import {
   CardTitle,
   Button,
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import {
   IoMdCreate,
   IoMdRemoveCircleOutline,
@@ -39,7 +40,9 @@ export default function Note(props: TProps): Node {
           close
           className="float-right ml-2"
         >
-          <IoMdCreate />
+          <Link to={`/notes/edit/${note.id}`}>
+            <IoMdCreate />
+          </Link>
         </Button>
         <Button
           close

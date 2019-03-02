@@ -1,43 +1,76 @@
 // @flow
 
-import React from 'react';
+import { connect } from 'react-redux';
+import type { Match, RouterHistory } from 'react-router-dom';
 
-import type { Node } from 'react';
-import type { TNote, TCategories } from '../../../../types';
+import type { TState, TNote } from '../../../../types';
 
-import ModalWrapper from '../ModalWrapper';
-import NoteForm from './NoteForm';
+import { createNote, updateNote } from '../../../../ducks/notes';
 
-export type TProps = {
-  title: string,
-  isOpen: boolean,
-  note: TNote,
-  categories: TCategories,
-  onSave: (note: TNote) => void,
-  onCancel: () => void
+import NoteModal from './NoteModal';
+
+type TOwnProps = {
+  match: Match,
+  history: RouterHistory,
 };
 
-export default function NoteModal(props: TProps): Node {
-  const {
-    title,
-    isOpen,
-    note,
-    categories,
-    onSave,
-    onCancel,
-  } = props;
+function mapStateToProps(state: TState, ownProps: TOwnProps): mixed {
+  const { match: { params } } = ownProps;
+  const { categories, notes } = state;
 
-  return (
-    <ModalWrapper
-      title={title}
-      isOpen={isOpen}
-    >
-      <NoteForm
-        note={note}
-        categories={categories}
-        onSave={onSave}
-        onCancel={onCancel}
-      />
-    </ModalWrapper>
-  );
+  if (params.mode === 'edit') {
+    return {
+      categories,
+      title: 'Изменить заметку',
+      note: notes.find(
+        ((n: TNote): boolean => n.id === params.id),
+      ),
+    };
+  }
+
+  return {
+    categories,
+    title: 'Создать заметку',
+    note: {
+      id: '',
+      title: '',
+      text: '',
+      color: '',
+      category: undefined,
+    },
+  };
 }
+
+function mapDispatchToProps(dispatch, ownProps: TOwnProps): mixed {
+  const {
+    history,
+    match: { params },
+  } = ownProps;
+
+  if (params.mode === 'edit') {
+    return {
+      onSave(note: TNote) {
+        dispatch(updateNote(note));
+        history.goBack();
+      },
+      onCancel() {
+        history.goBack();
+      },
+    };
+  }
+
+  return {
+    onSave(note: TNote) {
+      dispatch(createNote(note));
+      history.goBack();
+    },
+    onCancel() {
+      history.goBack();
+    },
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(NoteModal);
