@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Navbar,
   Input,
@@ -21,6 +21,8 @@ export type TProps = {
 export default function TopBar(props: TProps): Node {
   const { onSearch, searchQuery } = props;
   const [value, setValue] = useState(searchQuery);
+
+  useEffect((): void => setValue(searchQuery), [searchQuery]);
 
   function onChangeHandler(event) {
     setValue(event.target.value);
