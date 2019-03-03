@@ -30,7 +30,7 @@ export default function Note(props: TProps): Node {
   const removeHandler = (): void => remove(note.id);
 
   return (
-    <Card>
+    <Card style={{ backgroundColor: note.color }}>
       <CardBody>
         <CardTitle tag="h5">
           {note.title}
