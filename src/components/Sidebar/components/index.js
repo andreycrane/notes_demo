@@ -19,12 +19,13 @@ import type {
 } from '../../../types';
 
 export type TProps = {
+  active: ?TId,
   categories: TCategories,
   remove: (id: TId) => void
 };
 
 export default function Sidebar(props: TProps): Node {
-  const { categories, remove } = props;
+  const { active, categories, remove } = props;
 
   const style = {
     position: 'fixed',
@@ -59,6 +60,7 @@ export default function Sidebar(props: TProps): Node {
             key={c.id}
             category={c}
             remove={remove}
+            active={active === c.id}
           />
         ))}
       </ListGroup>

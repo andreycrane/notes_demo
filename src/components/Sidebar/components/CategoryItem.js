@@ -5,7 +5,7 @@ import {
   ListGroupItem,
   Button,
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import {
   IoMdCreate,
   IoMdRemoveCircleOutline,
@@ -15,24 +15,36 @@ import type { Node } from 'react';
 import type { TId, TCategory } from '../../../types';
 
 export type TProps = {
+  active: boolean,
   category: TCategory,
   remove: (id: TId) => void
 };
 
 export default function CategoryItem(props: TProps): Node {
-  const { category, remove } = props;
+  const { active, category, remove } = props;
 
   const handleRemove = (): void => remove(category.id);
 
   return (
-    <ListGroupItem>
-      {category.name}
+    <ListGroupItem
+      active={active}
+      action
+    >
+      <NavLink
+        to={{ pathname: '/', search: `?category=${category.id}` }}
+        activeClassName="text-white"
+        isActive={(): boolean => active}
+      >
+        {category.name}
+      </NavLink>
       <Button
         close
         className="float-right ml-2"
       >
         <Link to={`/categories/edit/${category.id}`}>
-          <IoMdCreate />
+          <IoMdCreate
+            style={{ color: 'black' }}
+          />
         </Link>
       </Button>
       <Button
