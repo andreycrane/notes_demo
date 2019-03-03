@@ -7,12 +7,12 @@ import type { Location } from 'react-router-dom';
 import type {
   TState,
   TId,
-  TNote,
   TNotes,
 } from '../../types';
 
 import { removeNote } from '../../ducks/notes';
 
+import { categoryFilter, searchFilter } from './filters';
 import NotesList from './components';
 
 type TProps = {
@@ -24,15 +24,9 @@ function mapStateToProps(state: TState, ownProps: TProps): mixed {
   const sp = new URLSearchParams(location.search);
 
   const filterParams = [
-    function categoryFilter(n: TNote): boolean {
-      if (!sp.has('category')) {
-        return true;
-      }
-
-      return (n.category === sp.get('category'));
-    },
+    categoryFilter.bind(null, sp),
+    searchFilter.bind(null, sp),
   ];
-
 
   const notes = filterParams.reduce(
     ((acc: TNotes, filterFunc): TNotes => acc.filter(filterFunc)),
