@@ -8,17 +8,24 @@ import {
 
 import type { Node } from 'react';
 
-import type { TId, TNotes, TNote } from '../../../types';
+import type {
+  TId,
+  TNotes,
+  TNote,
+  TCategories,
+  TCategory,
+} from '../../../types';
 
 import Note from './Note';
 
 export type TProps = {
   notes: TNotes,
+  categories: TCategories,
   remove: (id: TId) => void,
 };
 
 export default function NotesList(props: TProps): Node {
-  const { notes, remove } = props;
+  const { notes, remove, categories } = props;
 
   return (
     <Col
@@ -33,6 +40,9 @@ export default function NotesList(props: TProps): Node {
           >
             <Note
               note={n}
+              category={
+                categories.find((c: TCategory): boolean => (c.id === n.category))
+              }
               remove={remove}
             />
           </Col>

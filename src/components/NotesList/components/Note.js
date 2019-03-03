@@ -7,6 +7,7 @@ import {
   CardBody,
   CardTitle,
   Button,
+  Badge,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import {
@@ -15,15 +16,16 @@ import {
 } from 'react-icons/io';
 import type { Node } from 'react';
 
-import type { TId, TNote } from '../../../types';
+import type { TId, TNote, TCategory } from '../../../types';
 
 export type TProps = {
   note: TNote,
+  category: ?TCategory,
   remove: (id: TId) => void,
 };
 
 export default function Note(props: TProps): Node {
-  const { note, remove } = props;
+  const { note, category, remove } = props;
 
   const removeHandler = (): void => remove(note.id);
 
@@ -36,6 +38,7 @@ export default function Note(props: TProps): Node {
         <CardText>
           {note.text}
         </CardText>
+        {category && (<Badge color="info">{category.name}</Badge>)}
         <Button
           close
           className="float-right ml-2"

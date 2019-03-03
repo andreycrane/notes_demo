@@ -34,7 +34,10 @@ function mapStateToProps(state: TState, ownProps: TProps): mixed {
   );
 
 
-  return ({ notes });
+  return ({
+    notes,
+    categories: state.categories,
+  });
 }
 
 const mapDispatchToProps = (dispatch): mixed => ({
