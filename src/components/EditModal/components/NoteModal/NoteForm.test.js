@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { lorem, random, internet } from 'faker';
+import { lorem, random } from 'faker';
 
 import NoteForm from './NoteForm';
 
@@ -8,12 +8,14 @@ import {
   defaultState as categories,
 } from '../../../../ducks/categories';
 
+import { colors } from '../../../../lib/constants';
+
 describe('NoteForm', () => {
   const note = {
     id: random.uuid(),
     title: lorem.word(),
     text: lorem.sentences(),
-    color: internet.color(),
+    color: colors[0],
     category: categories[0].id,
   };
   const onCancel = jest.fn();
@@ -73,7 +75,6 @@ describe('NoteForm', () => {
   [
     { key: 'title', tag: 'input' },
     { key: 'text', tag: 'textarea' },
-    { key: 'color', tag: 'input' },
     { key: 'category', tag: 'select' },
   ].forEach(({ key, tag }) => {
     it(`renders "${key}" in ${tag}`, () => {
@@ -92,10 +93,24 @@ describe('NoteForm', () => {
     });
   });
 
+  it('renders "color" in color input', () => {
+    const onSave = jest.fn();
+    const wrapper = mount(
+      <NoteForm
+        note={note}
+        categories={categories}
+        onSave={onSave}
+        onCancel={onCancel}
+      />,
+    );
+
+    const Hover = wrapper.find(`ColorPicker Hover[active=true][color="${note.color}"]`);
+    expect(Hover).toHaveLength(1);
+  });
+
   [
     { key: 'title', tag: 'input', newValue: lorem.word() },
     { key: 'text', tag: 'textarea', newValue: lorem.paragraph() },
-    { key: 'color', tag: 'input', newValue: internet.color() },
     { key: 'category', tag: 'select', newValue: categories[1].id },
   ].forEach(({ key, tag, newValue }) => {
     it(`passes actual "${key}" to "onSave" callback`, () => {
@@ -131,5 +146,32 @@ describe('NoteForm', () => {
       );
       button.simulate('submit');
     });
+  });
+
+  it('passes actual "color" to "onSave" callback', async () => {
+    const newColor = colors[1];
+    const onSave = jest.fn(async () => {
+      await expect(onSave).toHaveBeenCalledWith({
+        ...note,
+        color: newColor,
+      });
+    });
+
+    const wrapper = mount(
+      <NoteForm
+        note={note}
+        categories={categories}
+        onSave={onSave}
+        onCancel={onCancel}
+      />,
+    );
+
+    const button = wrapper.find('button.js-btn-save');
+    const Swatch = wrapper.find(`ColorPicker Hover[active=false][color="${newColor}"] Swatch`);
+    expect(button.length).toBe(1);
+    expect(Swatch.length).toBe(1);
+
+    Swatch.simulate('click');
+    button.simulate('submit');
   });
 });

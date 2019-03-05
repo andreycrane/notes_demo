@@ -19,7 +19,7 @@ if (document.body && rootDiv) {
   render(
     (
       <Provider store={store}>
-        <BrowserRouter baseName="/">
+        <BrowserRouter basename="/">
           <App />
         </BrowserRouter>
       </Provider>

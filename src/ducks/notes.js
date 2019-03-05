@@ -1,9 +1,10 @@
 // @flow
 
-import { lorem, internet } from 'faker';
+import { lorem, random } from 'faker';
 
 import type { TId, TNotes, TNote } from '../types';
 import id from '../lib/id';
+import { colors } from '../lib/constants';
 
 // Action types
 type TCreateNote = $ReadOnly<{|
@@ -63,21 +64,21 @@ export const defaultState: TNotes = [
     id: id(),
     title: lorem.sentence(),
     text: lorem.text(),
-    color: internet.color(),
+    color: random.arrayElement(colors),
     category: undefined,
   },
   {
     id: id(),
     title: lorem.sentence(),
     text: lorem.text(),
-    color: internet.color(),
+    color: random.arrayElement(colors),
     category: undefined,
   },
   {
     id: id(),
     title: lorem.sentence(),
     text: lorem.text(),
-    color: internet.color(),
+    color: random.arrayElement(colors),
     category: undefined,
   },
 ];

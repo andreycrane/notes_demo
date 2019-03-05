@@ -18,6 +18,7 @@ import type { Node } from 'react';
 import type { TNote, TCategories } from '../../../../types';
 
 import FormikInput from '../FormikInput';
+import FormikColorInput from '../FormikColorInput';
 
 export type TProps = $ReadOnly<{|
   note: TNote,
@@ -67,17 +68,21 @@ export default function NoteForm(props: TProps): Node {
         >
           <FormGroup>
             <Label for="title">Title</Label>
-            <Field name="title" type="text" component={FormikInput} />
+            <Field
+              name="title"
+              type="text"
+              component={FormikInput}
+            />
             <ErrorMessage component={FormFeedback} name="title" />
           </FormGroup>
           <FormGroup>
             <Label for="text">Text</Label>
-            <Field name="text" type="textarea" component={FormikInput} />
+            <Field name="text" type="textarea" rows={5} component={FormikInput} />
             <ErrorMessage component={FormFeedback} name="text" />
           </FormGroup>
           <FormGroup>
             <Label for="color">Color</Label>
-            <Field name="color" type="color" component={FormikInput} />
+            <Field name="color" type="color" component={FormikColorInput} />
             <ErrorMessage component={FormFeedback} name="color" />
           </FormGroup>
           <FormGroup>
@@ -95,7 +100,7 @@ export default function NoteForm(props: TProps): Node {
                 </option>
               ))}
             </Field>
-            <ErrorMessage component={FormFeedback} name="color" />
+            <ErrorMessage component={FormFeedback} name="category" />
           </FormGroup>
           <Button
             color="secondary"
