@@ -20,13 +20,13 @@ export default function EditModal(): Node {
         {(props): Node => <CategoryModal {...props} />}
       </Route>
       <Route
-        path="/notes/:mode(edit)/:id"
-        component={NoteModal}
-      />
-      <Route
-        path="/notes/:mode(create)"
-        component={NoteModal}
-      />
+        path={[
+          '/notes/:mode(create)',
+          '/notes/:mode(edit)/:id',
+        ]}
+      >
+        {(props): Node => <NoteModal {...props} />}
+      </Route>
     </React.Fragment>
   );
 }

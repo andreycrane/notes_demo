@@ -15,11 +15,23 @@ type TOwnProps = {
 };
 
 function mapStateToProps(state: TState, ownProps: TOwnProps): mixed {
-  const { match: { params } } = ownProps;
+  const { match } = ownProps;
+
+  if (match === null) {
+    return {
+      title: '',
+      isOpen: false,
+      categories: [],
+      note: {},
+    };
+  }
+
+  const { params } = match;
   const { categories, notes } = state;
 
   if (params.mode === 'edit') {
     return {
+      isOpen: true,
       categories,
       title: 'Изменить заметку',
       note: notes.find(
@@ -29,6 +41,7 @@ function mapStateToProps(state: TState, ownProps: TOwnProps): mixed {
   }
 
   return {
+    isOpen: true,
     categories,
     title: 'Создать заметку',
     note: {
@@ -42,10 +55,17 @@ function mapStateToProps(state: TState, ownProps: TOwnProps): mixed {
 }
 
 function mapDispatchToProps(dispatch, ownProps: TOwnProps): mixed {
-  const {
-    history,
-    match: { params },
-  } = ownProps;
+  const { match } = ownProps;
+
+  if (match === null) {
+    return {
+      onSave() {},
+      onCancel() {},
+    };
+  }
+
+  const { history } = ownProps;
+  const { params } = match;
 
   if (params.mode === 'edit') {
     return {
