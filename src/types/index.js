@@ -17,17 +17,7 @@ export type TCategory = $ReadOnly<{|
 |}>;
 export type TCategories = $ReadOnlyArray<TCategory>;
 
-export type TEditMode = null | 'NEW' | 'EXISTING';
-export type TEditType = null | 'NOTE' | 'CATEGORY';
-
-export type TEdit = $ReadOnly<{|
-  mode: TEditMode,
-  type: TEditType,
-  id: TId | null
-|}>;
-
 export type TState = $ReadOnly<{|
   notes: TNotes,
   categories: TCategories,
-  edit: TEdit
 |}>;
