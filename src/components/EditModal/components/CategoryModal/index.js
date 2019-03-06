@@ -15,11 +15,22 @@ type TOwnProps = {
 };
 
 function mapStateToProps(state: TState, ownProps: TOwnProps): mixed {
-  const { match: { params } } = ownProps;
+  const { match } = ownProps;
+
+  if (match === null) {
+    return {
+      isOpen: false,
+      title: '',
+      category: {},
+    };
+  }
+
+  const { params } = match;
   const { categories } = state;
 
   if (params.mode === 'edit') {
     return {
+      isOpen: true,
       title: 'Изменить категорию',
       category: categories.find(
         ((c: TCategory): boolean => c.id === params.id),
@@ -28,16 +39,24 @@ function mapStateToProps(state: TState, ownProps: TOwnProps): mixed {
   }
 
   return {
+    isOpen: true,
     title: 'Создать категорию',
     category: { id: '', name: '' },
   };
 }
 
 function mapDispatchToProps(dispatch, ownProps: TOwnProps): mixed {
-  const {
-    history,
-    match: { params },
-  } = ownProps;
+  const { match } = ownProps;
+
+  if (match === null) {
+    return {
+      onSave() {},
+      onCancel() {},
+    };
+  }
+
+  const { history } = ownProps;
+  const { params } = match;
 
   if (params.mode === 'edit') {
     return {

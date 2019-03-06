@@ -10,6 +10,7 @@ import CategoryForm from './CategoryForm';
 import type { TCategory } from '../../../../types';
 
 export type TProps = {
+  isOpen: boolean,
   title: string,
   category: TCategory,
   onSave: (category: TCategory) => void,
@@ -19,6 +20,7 @@ export type TProps = {
 export default function CategoryModal(props: TProps): Node {
   const {
     title,
+    isOpen,
     category,
     onSave,
     onCancel,
@@ -27,7 +29,7 @@ export default function CategoryModal(props: TProps): Node {
   return (
     <ModalWrapper
       title={title}
-      isOpen
+      isOpen={isOpen}
     >
       <CategoryForm
         category={category}
