@@ -1,7 +1,5 @@
 // @flow
 
-import { lorem, random } from 'faker';
-
 import type { TId, TNotes, TNote } from '../types';
 import id from '../lib/id';
 import { colors } from '../lib/constants';
@@ -62,23 +60,23 @@ export function removeNote(payload: { +id: TId }): TRemoveNote {
 export const defaultState: TNotes = [
   {
     id: id(),
-    title: lorem.sentence(),
-    text: lorem.text(),
-    color: random.arrayElement(colors),
+    title: 'Voluptas et ut ipsa voluptas error.',
+    text: 'Eos eius corporis omnis aut magnam nobis pariatur. Labore cum vel magni ut officia deleniti.',
+    color: colors[0],
     category: undefined,
   },
   {
     id: id(),
-    title: lorem.sentence(),
-    text: lorem.text(),
-    color: random.arrayElement(colors),
+    title: 'Architecto atque ut sed eum dolores fugiat fugiat iste.',
+    text: 'Dolorum rerum consequatur et dignissimos. Sunt pariatur aut eos eos laborum voluptatum facilis quod fugit. ',
+    color: colors[0],
     category: undefined,
   },
   {
     id: id(),
-    title: lorem.sentence(),
-    text: lorem.text(),
-    color: random.arrayElement(colors),
+    title: 'Labore natus at iure qui quia eveniet quia.',
+    text: 'Molestiae voluptates cum quia temporibus blanditiis. Inventore non consequuntur fuga tenetur ut consectetur eos aut.',
+    color: colors[0],
     category: undefined,
   },
 ];

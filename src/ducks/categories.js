@@ -1,7 +1,5 @@
 // @flow
 
-import { lorem } from 'faker';
-
 import type { TId, TCategories, TCategory } from '../types';
 import genId from '../lib/id';
 
@@ -45,15 +43,15 @@ export function removeCategory(payload: { id: TId }): TRemoveCategory {
 export const defaultState: TCategories = [
   {
     id: genId(),
-    name: lorem.word(),
+    name: 'voluptatem',
   },
   {
     id: genId(),
-    name: lorem.word(),
+    name: 'minus',
   },
   {
     id: genId(),
-    name: lorem.word(),
+    name: 'quod',
   },
 ];
 
