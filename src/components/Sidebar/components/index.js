@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react';
+import React, { useContext } from 'react';
 import type { Node } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -10,6 +10,7 @@ import {
 } from 'reactstrap';
 import { IoMdAddCircleOutline } from 'react-icons/io';
 
+import ApplicationContext from '../../ApplicationContext';
 import CategoryItem from './CategoryItem';
 
 import type {
@@ -17,6 +18,8 @@ import type {
   TCategory,
   TId,
 } from '../../../types';
+
+import '../styles/index.css';
 
 export type TProps = {
   active: ?TId,
@@ -26,22 +29,13 @@ export type TProps = {
 
 export default function Sidebar(props: TProps): Node {
   const { active, categories, remove } = props;
-
-  const style = {
-    position: 'fixed',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    zIndex: 100,
-    padding: '60px 0 0',
-    boxShadow: 'inset -1px 0 0 rgba(0, 0, 0, .1)',
-  };
+  const { isSidebarOpen } = useContext(ApplicationContext);
 
   return (
     <Col
       lg={2}
-      style={style}
-      className="px-2"
+      md={4}
+      className={`sidebar px-2 ${isSidebarOpen ? 'show' : ''}`}
     >
       <h4>
         Categories

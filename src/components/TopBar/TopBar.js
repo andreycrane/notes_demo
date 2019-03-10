@@ -1,7 +1,12 @@
 // @flow
 
-import React, { useState, useEffect } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useContext,
+} from 'react';
 import {
+  NavbarToggler,
   Navbar,
   Input,
   Button,
@@ -13,6 +18,8 @@ import { IoIosCreate, IoIosSearch } from 'react-icons/io';
 
 import type { Node } from 'react';
 
+import ApplicationContext from '../ApplicationContext';
+
 export type TProps = {
   searchQuery: string,
   onSearch: (searchQuery: string) => void
@@ -22,8 +29,10 @@ export type TProps = {
 export default function TopBar(props: TProps): Node {
   const { onSearch, searchQuery } = props;
   const [value, setValue] = useState(searchQuery);
+  const { toggleSidebar } = useContext(ApplicationContext);
 
   useEffect((): void => setValue(searchQuery), [searchQuery]);
+
 
   function onChangeHandler(event) {
     setValue(event.target.value);
@@ -41,7 +50,11 @@ export default function TopBar(props: TProps): Node {
       expand="md"
       className="flex-nowrap"
     >
-      <div className="flex-grow-0">
+      <NavbarToggler
+        className="mr-1"
+        onClick={toggleSidebar}
+      />
+      <div className="d-none d-sm-flex flex-grow-0">
         <Link to="/" className="navbar-brand">
           Notes
         </Link>

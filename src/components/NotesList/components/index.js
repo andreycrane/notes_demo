@@ -30,12 +30,15 @@ export default function NotesList(props: TProps): Node {
   return (
     <Col
       lg={10}
+      md={8}
       className="ml-auto"
     >
       <Row className="pt-3">
         {notes.map((n: TNote): Node => (
           <Col
-            md={4}
+            lg={4}
+            md={6}
+            className="mb-5"
             key={n.id}
           >
             <Note
