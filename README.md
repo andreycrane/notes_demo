@@ -19,6 +19,10 @@ Why have I used so many packages for so small application. There is only one ans
 just for example. To be honest I'm sure that using of these packages needed only for
 really big applications.
 
+## Demo
+
+Be sure to visit [page](https://demonotes.herokuapp.com/) where I've deployed this application
+
 ## How to see it in work
 
 In order to see this small application you have to install `git` and `nodejs` 
@@ -44,7 +48,7 @@ When installation process will be finished you can start local server by typing 
 command in terminal:
 
 ```bash
-npm run server
+npm run build:production && npm run server:production
 ```
 
-After you can go to your browser and open `localhost:8080` address. That's it!
+After you can go to your browser and open `localhost:8090` address. That's it!

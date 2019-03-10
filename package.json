@@ -8,6 +8,7 @@
     "build:production": "webpack --config webpack.config.prod.js",
     "watch": "webpack --config webpack.config.dev.js --watch",
     "server": "webpack-dev-server --config webpack.config.dev.js --color --progress",
+    "server:production": "npx serve -s -l 8090 ./dist",
     "test": "jest",
     "test:watch": "jest --watch",
     "heroku-postbuild": "npm run build:production"
