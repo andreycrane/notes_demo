@@ -2,18 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import {
-  Collapse,
-  NavbarToggler,
   Navbar,
-  Form,
   Input,
   Button,
   InputGroup,
   InputGroupAddon,
-  Row,
-  Col,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { IoIosCreate, IoIosSearch } from 'react-icons/io';
 
 import type { Node } from 'react';
 
@@ -26,7 +22,6 @@ export type TProps = {
 export default function TopBar(props: TProps): Node {
   const { onSearch, searchQuery } = props;
   const [value, setValue] = useState(searchQuery);
-  const [isOpen, toggleOpen] = useState(false);
 
   useEffect((): void => setValue(searchQuery), [searchQuery]);
 
@@ -38,51 +33,50 @@ export default function TopBar(props: TProps): Node {
     onSearch(value);
   }
 
-  function toggle() {
-    toggleOpen(!isOpen);
-  }
-
   return (
     <Navbar
       dark
       fixed="top"
       color="dark"
       expand="md"
+      className="flex-nowrap"
     >
-      <Link to="/" className="navbar-brand">
-        Notes
-      </Link>
-      <NavbarToggler onClick={toggle} />
-      <Collapse isOpen={isOpen} navbar>
-        <Form className="w-100 my-2 my-md-0 my-lg-0">
-          <Row>
-            <Col lg={11} md={10} xs={12} sm={12} className="pr-md-0 mb-2 mb-md-0">
-              <InputGroup>
-                <Input
-                  onChange={onChangeHandler}
-                  value={value}
-                  className="bg-dark text-light js-search-input"
-                />
-                <InputGroupAddon addonType="append">
-                  <Button
-                    onClick={onSearchHandler}
-                    className="js-search-btn"
-                  >
-                    Search
-                  </Button>
-                </InputGroupAddon>
-              </InputGroup>
-            </Col>
-            <Col lg={1} md={2} xs={12} sm={12}>
-              <Link to="/notes/create">
-                <Button className="w-100" color="primary" outline={false}>
-                    New
-                </Button>
-              </Link>
-            </Col>
-          </Row>
-        </Form>
-      </Collapse>
+      <div className="flex-grow-0">
+        <Link to="/" className="navbar-brand">
+          Notes
+        </Link>
+      </div>
+      <div
+        className="flex-grow-1"
+      >
+        <div className="d-flex flex-row">
+          <InputGroup
+            className="mr-1 flex-grow-1"
+          >
+            <Input
+              onChange={onChangeHandler}
+              value={value}
+              className="bg-dark text-light js-search-input"
+            />
+            <InputGroupAddon addonType="append">
+              <Button
+                onClick={onSearchHandler}
+                className="js-search-btn"
+              >
+                <IoIosSearch />
+              </Button>
+            </InputGroupAddon>
+          </InputGroup>
+          <Link
+            className="flex-grow-0"
+            to="/notes/create"
+          >
+            <Button className="w-100" color="primary" outline={false}>
+              <IoIosCreate />
+            </Button>
+          </Link>
+        </div>
+      </div>
     </Navbar>
   );
 }
