@@ -2,11 +2,16 @@
 
 import React, { useState, useEffect } from 'react';
 import {
+  Collapse,
+  NavbarToggler,
   Navbar,
+  Form,
   Input,
   Button,
   InputGroup,
   InputGroupAddon,
+  Row,
+  Col,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
@@ -21,6 +26,7 @@ export type TProps = {
 export default function TopBar(props: TProps): Node {
   const { onSearch, searchQuery } = props;
   const [value, setValue] = useState(searchQuery);
+  const [isOpen, toggleOpen] = useState(false);
 
   useEffect((): void => setValue(searchQuery), [searchQuery]);
 
@@ -32,6 +38,10 @@ export default function TopBar(props: TProps): Node {
     onSearch(value);
   }
 
+  function toggle() {
+    toggleOpen(!isOpen);
+  }
+
   return (
     <Navbar
       dark
@@ -39,35 +49,40 @@ export default function TopBar(props: TProps): Node {
       color="dark"
       expand="md"
     >
-      <Link
-        to="/"
-        className="navbar-brand"
-      >
+      <Link to="/" className="navbar-brand">
         Notes
       </Link>
-      <InputGroup className="mr-2">
-        <Input
-          onChange={onChangeHandler}
-          value={value}
-          className="bg-dark text-light js-search-input"
-        />
-        <InputGroupAddon addonType="append">
-          <Button
-            onClick={onSearchHandler}
-            className="js-search-btn"
-          >
-            Search
-          </Button>
-        </InputGroupAddon>
-      </InputGroup>
-      <Link to="/notes/create">
-        <Button
-          color="primary"
-          outline={false}
-        >
-            New
-        </Button>
-      </Link>
+      <NavbarToggler onClick={toggle} />
+      <Collapse isOpen={isOpen} navbar>
+        <Form className="w-100 my-2 my-md-0 my-lg-0">
+          <Row>
+            <Col lg={11} md={10} xs={12} sm={12} className="pr-md-0 mb-2 mb-md-0">
+              <InputGroup>
+                <Input
+                  onChange={onChangeHandler}
+                  value={value}
+                  className="bg-dark text-light js-search-input"
+                />
+                <InputGroupAddon addonType="append">
+                  <Button
+                    onClick={onSearchHandler}
+                    className="js-search-btn"
+                  >
+                    Search
+                  </Button>
+                </InputGroupAddon>
+              </InputGroup>
+            </Col>
+            <Col lg={1} md={2} xs={12} sm={12}>
+              <Link to="/notes/create">
+                <Button className="w-100" color="primary" outline={false}>
+                    New
+                </Button>
+              </Link>
+            </Col>
+          </Row>
+        </Form>
+      </Collapse>
     </Navbar>
   );
 }
