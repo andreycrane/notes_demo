@@ -9,7 +9,8 @@
     "watch": "webpack --config webpack.config.dev.js --watch",
     "server": "webpack-dev-server --config webpack.config.dev.js --color --progress",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "heroku-postbuild": "npm run build:production"
   },
   "engines": {
     "node": "10.15.1"
