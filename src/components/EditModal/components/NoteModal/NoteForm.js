@@ -28,8 +28,12 @@ export type TProps = $ReadOnly<{|
 |}>;
 
 // Synchronous validation
-export function validate(): mixed {
+export function validate({ text }: { text?: string }): mixed {
   const errors = {};
+
+  if (!text) {
+    errors.text = 'Required';
+  }
 
   return errors;
 }
