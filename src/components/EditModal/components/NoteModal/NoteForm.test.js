@@ -104,7 +104,7 @@ describe('NoteForm', () => {
       />,
     );
 
-    const Hover = wrapper.find(`ColorPicker Hover[active=true][color="${note.color}"]`);
+    const Hover = wrapper.find(`ColorButton[active=true][color="${note.color}"]`);
     expect(Hover).toHaveLength(1);
   });
 
@@ -167,7 +167,7 @@ describe('NoteForm', () => {
     );
 
     const button = wrapper.find('button.js-btn-save');
-    const Swatch = wrapper.find(`ColorPicker Hover[active=false][color="${newColor}"] Swatch`);
+    const Swatch = wrapper.find(`ColorButton[active=false][color="${newColor}"] div`);
     expect(button.length).toBe(1);
     expect(Swatch.length).toBe(1);
 
