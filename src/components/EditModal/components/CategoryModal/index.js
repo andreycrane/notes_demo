@@ -31,7 +31,7 @@ function mapStateToProps(state: TState, ownProps: TOwnProps): mixed {
   if (params.mode === 'edit') {
     return {
       isOpen: true,
-      title: 'Изменить категорию',
+      title: 'Edit existing category',
       category: categories.find(
         ((c: TCategory): boolean => c.id === params.id),
       ),
@@ -40,7 +40,7 @@ function mapStateToProps(state: TState, ownProps: TOwnProps): mixed {
 
   return {
     isOpen: true,
-    title: 'Создать категорию',
+    title: 'Create new category',
     category: { id: '', name: '' },
   };
 }

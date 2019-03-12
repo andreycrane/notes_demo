@@ -33,7 +33,7 @@ function mapStateToProps(state: TState, ownProps: TOwnProps): mixed {
     return {
       isOpen: true,
       categories,
-      title: 'Изменить заметку',
+      title: 'Edit existing note',
       note: notes.find(
         ((n: TNote): boolean => n.id === params.id),
       ),
@@ -43,7 +43,7 @@ function mapStateToProps(state: TState, ownProps: TOwnProps): mixed {
   return {
     isOpen: true,
     categories,
-    title: 'Создать заметку',
+    title: 'Create new note',
     note: {
       id: '',
       title: '',
