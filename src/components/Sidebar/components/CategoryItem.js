@@ -5,7 +5,6 @@ import {
   ListGroupItem,
   Button,
 } from 'reactstrap';
-import { NavLink, Link } from 'react-router-dom';
 import {
   IoMdCreate,
   IoMdRemoveCircleOutline,
@@ -13,6 +12,8 @@ import {
 
 import type { Node } from 'react';
 import type { TId, TCategory } from '../../../types';
+
+import MergeLink from '../../MergeLink';
 
 export type TProps = {
   active: boolean,
@@ -30,22 +31,21 @@ export default function CategoryItem(props: TProps): Node {
       active={active}
       action
     >
-      <NavLink
-        to={{ pathname: '/', search: `?category=${category.id}` }}
-        activeClassName="text-white"
-        isActive={(): boolean => active}
+      <MergeLink
+        to={{ search: `?category=${category.id}` }}
+        className={active ? 'text-white' : ''}
       >
         {category.name}
-      </NavLink>
+      </MergeLink>
       <Button
         close
         className="float-right ml-2"
       >
-        <Link to={`/categories/edit/${category.id}`}>
+        <MergeLink to={{ pathname: `/categories/edit/${category.id}` }}>
           <IoMdCreate
             style={{ color: 'black' }}
           />
-        </Link>
+        </MergeLink>
       </Button>
       <Button
         close

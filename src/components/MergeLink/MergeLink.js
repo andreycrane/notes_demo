@@ -12,8 +12,9 @@ import type {
 export type TProps = $ReadOnly<{
   history: RouterHistory,
   location: Location,
-  children: string,
+  children: Node,
   to: LocationShape,
+  className?: string,
 }>;
 
 export default function MergeLink(props: TProps): Node {
@@ -22,6 +23,7 @@ export default function MergeLink(props: TProps): Node {
     history,
     children,
     to,
+    className,
   } = props;
 
   function onClickHandler() {
@@ -45,12 +47,15 @@ export default function MergeLink(props: TProps): Node {
   }
 
   return (
-    <button
-      className="btn btn-link"
-      type="button"
+    // eslint-disable-next-line jsx-a11y/anchor-is-valid,jsx-a11y/click-events-have-key-events
+    <a
+      role="button"
+      tabIndex={-1}
+      style={{ cursor: 'pointer' }}
       onClick={onClickHandler}
+      className={className}
     >
       {children}
-    </button>
+    </a>
   );
 }

@@ -18,6 +18,7 @@ import { IoIosCreate, IoIosSearch } from 'react-icons/io';
 
 import type { Node } from 'react';
 
+import MergeLink from '../MergeLink';
 import ApplicationContext from '../ApplicationContext';
 
 export type TProps = {
@@ -80,14 +81,14 @@ export default function TopBar(props: TProps): Node {
               </Button>
             </InputGroupAddon>
           </InputGroup>
-          <Link
+          <MergeLink
             className="flex-grow-0"
-            to="/notes/create"
+            to={{ pathname: '/notes/create' }}
           >
             <Button className="w-100" color="primary" outline={false}>
               <IoIosCreate />
             </Button>
-          </Link>
+          </MergeLink>
         </div>
       </div>
     </Navbar>

@@ -9,7 +9,6 @@ import {
   Button,
   Badge,
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
 import {
   IoMdCreate,
   IoMdRemoveCircleOutline,
@@ -17,6 +16,8 @@ import {
 import type { Node } from 'react';
 
 import type { TId, TNote, TCategory } from '../../../types';
+
+import MergeLink from '../../MergeLink';
 
 export type TProps = {
   note: TNote,
@@ -43,9 +44,9 @@ export default function Note(props: TProps): Node {
           close
           className="float-right ml-2"
         >
-          <Link to={`/notes/edit/${note.id}`}>
+          <MergeLink to={{ pathname: `/notes/edit/${note.id}` }}>
             <IoMdCreate />
-          </Link>
+          </MergeLink>
         </Button>
         <Button
           close
