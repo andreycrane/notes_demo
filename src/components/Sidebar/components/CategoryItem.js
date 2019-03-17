@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   ListGroupItem,
   Button,
@@ -21,10 +21,14 @@ export type TProps = {
   remove: (id: TId) => void
 };
 
-export default function CategoryItem(props: TProps): Node {
+export function CategoryItemComponent(props: TProps): Node {
   const { active, category, remove } = props;
 
-  const handleRemove = (): void => remove(category.id);
+  type THandleRemove = () => void;
+  const handleRemove = useMemo(
+    (): THandleRemove => ((): void => remove(category.id)),
+    [category.id],
+  );
 
   return (
     <ListGroupItem
@@ -57,3 +61,5 @@ export default function CategoryItem(props: TProps): Node {
     </ListGroupItem>
   );
 }
+
+export default React.memo<TProps>(CategoryItemComponent);

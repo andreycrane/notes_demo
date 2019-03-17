@@ -27,7 +27,7 @@ export type TProps = {
   remove: (id: TId) => void
 };
 
-export default function Sidebar(props: TProps): Node {
+export function SidebarComponent(props: TProps): Node {
   const { active, categories, remove } = props;
   const { isSidebarOpen } = useContext(ApplicationContext);
 
@@ -61,3 +61,5 @@ export default function Sidebar(props: TProps): Node {
     </Col>
   );
 }
+
+export default React.memo<TProps>(SidebarComponent);

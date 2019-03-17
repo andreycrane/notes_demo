@@ -26,8 +26,7 @@ export type TProps = {
   onSearch: (searchQuery: string) => void
 };
 
-
-export default function TopBar(props: TProps): Node {
+export function TopBarComponent(props: TProps): Node {
   const { onSearch, searchQuery } = props;
   const [value, setValue] = useState(searchQuery);
   const { toggleSidebar } = useContext(ApplicationContext);
@@ -94,3 +93,5 @@ export default function TopBar(props: TProps): Node {
     </Navbar>
   );
 }
+
+export default React.memo<TProps>(TopBarComponent);

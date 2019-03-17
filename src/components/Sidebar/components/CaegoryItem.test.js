@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import { lorem, random } from 'faker';
 import { MemoryRouter } from 'react-router-dom';
 
-import CategoryItem from './CategoryItem';
+import { CategoryItemComponent as CategoryItem } from './CategoryItem';
 
 describe('CategoryItem component', () => {
   const remove = jest.fn();

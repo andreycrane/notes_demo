@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   Card,
   CardText,
@@ -14,6 +14,7 @@ import {
   IoMdRemoveCircleOutline,
 } from 'react-icons/io';
 import type { Node } from 'react';
+import type { LocationShape } from 'react-router-dom';
 
 import type { TId, TNote, TCategory } from '../../../types';
 
@@ -25,13 +26,25 @@ export type TProps = {
   remove: (id: TId) => void,
 };
 
-export default function Note(props: TProps): Node {
+export function NoteComponent(props: TProps): Node {
   const { note, category, remove } = props;
 
-  const removeHandler = (): void => remove(note.id);
+  type TOnRemoveHandler = () => void;
+  const removeHandler = useMemo(
+    (): TOnRemoveHandler => (): void => remove(note.id),
+    [note.id],
+  );
+  const editLink = useMemo(
+    (): LocationShape => ({ pathname: `/notes/edit/${note.id}` }),
+    [note.id],
+  );
+  const cardStyle = useMemo(
+    (): mixed => ({ backgroundColor: note.color }),
+    [note.color],
+  );
 
   return (
-    <Card style={{ backgroundColor: note.color }}>
+    <Card style={cardStyle}>
       <CardBody>
         <CardTitle tag="h5">
           {note.title}
@@ -44,7 +57,7 @@ export default function Note(props: TProps): Node {
           close
           className="float-right ml-2"
         >
-          <MergeLink to={{ pathname: `/notes/edit/${note.id}` }}>
+          <MergeLink to={editLink}>
             <IoMdCreate />
           </MergeLink>
         </Button>
@@ -59,3 +72,5 @@ export default function Note(props: TProps): Node {
     </Card>
   );
 }
+
+export default React.memo<TProps>(NoteComponent);

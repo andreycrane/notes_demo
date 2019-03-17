@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import { lorem, random, internet } from 'faker';
 import { MemoryRouter } from 'react-router-dom';
 
-import Note from './Note';
+import { NoteComponent as Note } from './Note';
 
 describe('Note component', () => {
   const remove = jest.fn();

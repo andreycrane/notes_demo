@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import { lorem } from 'faker';
 import { MemoryRouter } from 'react-router-dom';
 
-import TopBar from './TopBar';
+import { TopBarComponent as TopBar } from './TopBar';
 
 describe('TopBar component', () => {
   const searchQuery = lorem.word();

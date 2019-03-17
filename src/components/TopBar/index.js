@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { withRouter } from 'react-router-dom';
 import type { Node } from 'react';
 import type { Location, RouterHistory } from 'react-router-dom';
@@ -18,17 +18,22 @@ function Component(props: TProps): Node {
   const search = sp.get('search');
   const searchQuery = typeof search === 'string' ? search : '';
 
-  function onSearch(query: string) {
-    if (query.length > 0) {
-      history.push({
-        pathname: '/',
-        search: `?search=${query}`,
-      });
-      return;
-    }
+  // using the same handler function if nothing changed
+  type TOnSearch = (query: string) => void;
+  const onSearch = useMemo(
+    ((): TOnSearch => (query: string) => {
+      if (query.length > 0) {
+        history.push({
+          pathname: '/',
+          search: `?search=${query}`,
+        });
+        return;
+      }
 
-    history.push('/');
-  }
+      history.push('/');
+    }),
+    [history],
+  );
 
   return (
     <TopBar
