@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
 
 type AppStore = Store<TState, TAction, Dispatch<TAction>>;
 
-export default function configureStore(preloadedState: TState): AppStore {
+export default function configureStore(preloadedState: TState | void): AppStore {
   const store = createStore<TState, TAction, Dispatch<TAction>>(
     rootReducer,
     preloadedState,

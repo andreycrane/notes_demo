@@ -9,9 +9,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import App from './components/App';
 import configureStore from './configureStore';
-import defaultState from './default-state';
+import { loadState, saveState } from './localStorage';
 
-const store = configureStore(defaultState);
+const preloadState = loadState();
+const store = configureStore(preloadState);
+
+store.subscribe(() => {
+  saveState(store.getState());
+});
+
 const rootDiv = document.createElement('div');
 
 if (document.body && rootDiv) {
